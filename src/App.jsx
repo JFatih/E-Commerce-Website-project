@@ -4,11 +4,11 @@ import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import HomePage from "./pages/HomePage";
 import Shop from "./pages/Shop";
-import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -21,8 +21,8 @@ function App() {
         <Route exact path="/shop">
           <Shop />
         </Route>
-        <Route exact path="/about">
-          <About />
+        <Route exact path="/aboutus">
+          <AboutUs />
         </Route>
         <Route exact path="/blog">
           <Blog />

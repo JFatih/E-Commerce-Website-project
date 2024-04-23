@@ -31,7 +31,7 @@
 }
 
 .smobile-menu {
-  @apply text-[30px] font-normal;
+  @apply text-[15px] font-normal;
 }
 
 .sparagraph {
