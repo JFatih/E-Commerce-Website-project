@@ -2,46 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-.sh1 {
-  @apply text-[58px] font-extrabold;
-}
+@layer components {
+  .sh1 {
+    @apply text-[58px] font-extrabold tracking-[0.013em] leading-[80px];
+  }
 
-.sh2 {
-  @apply text-[40px] font-bold;
-}
+  .sh2 {
+    @apply text-[40px] font-bold tracking-[0.013em] leading-[57px];
+  }
 
-.sh3 {
-  @apply text-[24px] font-bold;
-}
+  .sh3 {
+    @apply text-[24px] font-bold tracking-[0.006em] leading-[32px];
+  }
 
-.sh4 {
-  @apply text-[20px] font-medium;
-}
+  .sh4 {
+    @apply text-[20px] font-normal tracking-[0.013em] leading-[30px];
+  }
 
-.sh5 {
-  @apply text-[16px] font-bold;
-}
+  .sh5 {
+    @apply text-[16px] font-bold tracking-[0.006em] leading-[24px];
+  }
 
-.sh6 {
-  @apply text-[14px] font-semibold;
-}
+  .sh6 {
+    @apply text-[14px] font-semibold tracking-[0.013em] leading-[24px];
+  }
 
-.sbtn-text {
-  @apply text-[14px] font-bold;
-}
+  .sbtn-text {
+    @apply text-[14px] font-bold tracking-[0.013em] leading-[28px];
+  }
 
-.smobile-menu {
-  @apply text-[15px] font-normal;
-}
+  .smobile-menu {
+    @apply text-[30px] font-normal tracking-[0.013em] leading-[45px];
+  }
 
-.sparagraph {
-  @apply text-[30px] font-medium;
-}
+  .sparagraph {
+    @apply text-[14px] font-medium tracking-[0.013em] leading-[20px];
+  }
 
-.slist {
-  @apply text-[20px] font-normal;
-}
+  .slist {
+    @apply text-[20px] font-normal tracking-[0.013em] leading-[30px];
+  }
 
-.slink {
-  @apply text-[14px] font-semibold;
+  .slink {
+    @apply text-[14px] font-semibold tracking-[0.013em] leading-[24px];
+  }
 }

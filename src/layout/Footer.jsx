@@ -4,9 +4,9 @@ import { footerData } from "../mocks/footerData";
 export default function Footer() {
   return (
     <footer className="max-w-screen">
-      <section className=" bg-lightgray1 p-8">
+      <section className=" bg-lightTextGray p-8">
         <div className="max-w-[1200px] flex flex-col gap-2  sm:flex-row sm:items-center sm:justify-between sm:m-auto">
-          <p className="sh3 text-textColor ">Butik</p>
+          <p className="sh3 text-textColor ">Boutique</p>
           <span className="text-primaryColor flex gap-3">
             <i className="fa-brands fa-facebook"></i>
             <i className="fa-brands fa-instagram"></i>
@@ -39,7 +39,7 @@ export default function Footer() {
           <div className="">
             <p className="sh5 py-4">Get In Touch</p>
             <form className="subscribe">
-              <div className="flex justify-center items-center">
+              <div className="">
                 <input
                   type="text"
                   placeholder="Your e-mail"
@@ -61,10 +61,10 @@ export default function Footer() {
           </div>
         </div>
       </section>
-      <section className="bg-lightgray1 px-8 py-5">
+      <section className="bg-lightTextGray px-8 py-5">
         <div className="max-w-[1200px] m-auto flex justify-center sm:justify-start">
           <p className="sbtn-text text-center sm:text-start flex flex-wrap px-[56px] sm:px-[0px] text-seconTextColor">
-            Made With Love By Finland All Right Reserved{" "}
+            Made With Love By Fatih ÇAKMAK All Right Reserved{" "}
           </p>
         </div>
       </section>

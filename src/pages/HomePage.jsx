@@ -1,7 +1,9 @@
+import Slider from "../layout/Slider";
+
 export default function HomePage() {
   return (
     <>
-      <p>Home Page</p>
+      <Slider />
     </>
   );
 }

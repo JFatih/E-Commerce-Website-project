@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { headerData } from "../mocks/headerdata";
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
@@ -36,26 +37,23 @@ export default function Header() {
       <section className="bg-white text-textColor px-8 py-3">
         <main className="max-w-[1200px] mx-auto flex justify-between items-center">
           <div className="flex gap-[7vw]">
-            <p className="sh3">Butik</p>
+            <p className="sh3">Boutique</p>
             <nav className="hidden lg:flex items-center sh6">
               <ul className="flex gap-5">
-                <li>
-                  <Link to="/">Ana Sayfa</Link>
-                </li>
-                <li>
-                  <Link to="/shop">
-                    Shop <i className="fa-solid fa-angle-down"></i>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/about">About</Link>
-                </li>
-                <li>
-                  <Link to="/blog">Blog</Link>
-                </li>
-                <li>
-                  <Link to="/contact">Contact</Link>
-                </li>
+                {headerData.map((data, index) => {
+                  return (
+                    <li key={index}>
+                      <Link to={data.link}>
+                        {data.name}
+                        {index === 1 ? (
+                          <i className="fa-solid fa-angle-down"></i>
+                        ) : (
+                          ""
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
           </div>
@@ -77,23 +75,20 @@ export default function Header() {
         {menu ? (
           <nav className="lg:hidden ">
             <ul className="flex flex-col items-center m-1 justify-center sh6">
-              <li>
-                <Link to="/">Ana Sayfa</Link>
-              </li>
-              <li>
-                <Link to="/shop">
-                  Shop <i className="fa-solid fa-angle-down"></i>
-                </Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/blog">Blog</Link>
-              </li>
-              <li>
-                <Link to="/contact">Contact</Link>
-              </li>
+              {headerData.map((data, index) => {
+                return (
+                  <li key={index} className="py-2">
+                    <Link to={data.link}>
+                      {data.name}
+                      {index === 1 ? (
+                        <i className="fa-solid fa-angle-down"></i>
+                      ) : (
+                        ""
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         ) : (
