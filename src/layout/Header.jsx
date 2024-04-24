@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <header className="w-screen">
-      <section className="bg-color3 text-white px-8 py-3">
+      <section className="bg-color3 text-white sm:px-8 sm:py-3 px-4 py-2">
         <div className="max-w-[1200px] m-auto sh6">
           <div className="flex sm:justify-between justify-center ">
             <div className="lg:flex gap-4 hidden">
@@ -37,7 +37,9 @@ export default function Header() {
       <section className="bg-white text-textColor px-8 py-3">
         <main className="max-w-[1200px] mx-auto flex justify-between items-center">
           <div className="flex gap-[7vw]">
-            <p className="sh3">Boutique</p>
+            <Link to="/">
+              <p className="sh3">Boutique</p>
+            </Link>
             <nav className="hidden lg:flex items-center sh6">
               <ul className="flex gap-5">
                 {headerData.map((data, index) => {

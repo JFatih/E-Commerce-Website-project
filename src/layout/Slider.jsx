@@ -14,11 +14,11 @@ export default function App() {
         pagination={true}
         modules={[Pagination, Navigation]}
         navigation={true}
-        className="sm:w-full sm:h-full h-[500px] bg-white text-white"
+        className="sm:w-full sm:h-full h-[500px] bg-white text-white max-w-screen-2xl"
       >
         <SwiperSlide className="relative">
           <img
-            src="../../src/assets/carousel.png"
+            src="/carousel.png"
             className="sm:w-full h-full object-cover object-top"
           />
           <div className="absolute sm:p-64 inset-0 text-white flex flex-col justify-center items-center sm:items-start text-center sm:text-start sm:gap-5 gap-3">
@@ -36,7 +36,7 @@ export default function App() {
         </SwiperSlide>
         <SwiperSlide className="relative">
           <img
-            src="../../src/assets/carousel.png"
+            src="/carousel.png"
             className="sm:w-full h-full object-cover object-top"
           />
           <div className="absolute sm:p-64 inset-0 text-white flex flex-col justify-center items-center sm:items-start text-center sm:text-start sm:gap-5 gap-3">
