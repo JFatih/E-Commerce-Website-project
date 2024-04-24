@@ -46,4 +46,12 @@
   .slink {
     @apply text-[14px] font-semibold tracking-[0.013em] leading-[24px];
   }
+
+  .mobileTextPadding {
+    @apply px-14 py-10;
+  }
+
+  .mobileCardPadding {
+    @apply px-8;
+  }
 }

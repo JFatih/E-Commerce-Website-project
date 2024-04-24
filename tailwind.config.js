@@ -15,6 +15,9 @@ export default {
         seconTextColor: "#737373",
         successColor: "#2DC071",
         lightTextGray: "#FAFAFA",
+        secondColor: "#23856D",
+        alertColor: "#E77C40",
+        darkBackgroundColor: "#252B42",
       },
       fontSize: {
         h1: ["58px", "font-extrabold"],
