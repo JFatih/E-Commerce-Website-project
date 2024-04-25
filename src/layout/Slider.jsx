@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function App() {
+export default function Slider() {
   return (
     <>
       <Swiper

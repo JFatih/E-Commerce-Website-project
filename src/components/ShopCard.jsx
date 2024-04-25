@@ -56,7 +56,6 @@ export default function ShopCard() {
           </div>
         </div>
       </section>
-      <ProductCard />
     </>
   );
 }
