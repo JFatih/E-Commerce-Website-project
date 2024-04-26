@@ -26,7 +26,7 @@ export default function Footer() {
                   {Object.values(base.pages).map((page, index) => {
                     return (
                       <Link to={page.link} key={index}>
-                        <p className="sh6 text-seconTextColor py-1 md:py-2">
+                        <p className="sh6 text-secondTextColor py-1 md:py-2">
                           {page.title}
                         </p>
                       </Link>
@@ -54,7 +54,7 @@ export default function Footer() {
                   </button>
                 </span>
               </div>
-              <p className="sh6 text-seconTextColor py-2">
+              <p className="sh6 text-secondTextColor py-2">
                 Lore imp sum dolor Amit
               </p>
             </form>
@@ -63,7 +63,7 @@ export default function Footer() {
       </section>
       <section className="bg-lightTextGray px-8 py-5">
         <div className="max-w-[1200px] m-auto flex justify-center sm:justify-start">
-          <p className="sbtn-text text-center sm:text-start flex flex-wrap px-[56px] sm:px-[0px] text-seconTextColor">
+          <p className="sbtn-text text-center sm:text-start flex flex-wrap px-[56px] sm:px-[0px] text-secondTextColor">
             Made With Love By Fatih ÇAKMAK All Right Reserved{" "}
           </p>
         </div>

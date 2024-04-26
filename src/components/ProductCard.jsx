@@ -4,9 +4,9 @@ export default function ProductCard() {
   return (
     <section className="max-w-[1200px] mx-auto py-5">
       <div className="mobileTextPadding text-center flex flex-col gap-3">
-        <p className="sh4 text-seconTextColor">Featured Products</p>
+        <p className="sh4 text-secondTextColor">Featured Products</p>
         <p className="sh3 text-textColor">BESTSELLER PRODUCTS</p>
-        <p className="sparagraph text-seconTextColor">
+        <p className="sparagraph text-secondTextColor">
           Problems trying to resolve the conflict between
         </p>
       </div>
@@ -20,9 +20,9 @@ export default function ProductCard() {
               />
               <div className="text-center p-5 flex flex-col gap-2">
                 <h1 className="sh5 text-textColor">{data.name}</h1>
-                <p className="slink text-seconTextColor">{data.subTitle}</p>
+                <p className="slink text-secondTextColor">{data.subTitle}</p>
                 <span className="flex justify-center gap-2">
-                  <p className="sh5 text-mutedColor">${data.basePrice}</p>
+                  <p className="sh5 text-mutedTextColor">${data.basePrice}</p>
                   <p className="sh5 text-secondaryColor">${data.disPrice}</p>
                 </span>
                 <div className="flex justify-center gap-1">

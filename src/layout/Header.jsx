@@ -10,7 +10,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-screen">
+    <header className="">
       <section className="bg-color3 text-white sm:px-8 sm:py-3 px-4 py-2">
         <div className="max-w-[1200px] m-auto sh6">
           <div className="flex sm:justify-between justify-center ">
