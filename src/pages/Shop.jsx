@@ -83,20 +83,41 @@ export default function Shop() {
       </div>
       {display === "grid" ? <ProductCard /> : <ProductCard2 />}
       <div className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">
-        <button className="border border-mutedTextColor p-5 rounded-l-lg text-primaryColor shadow-md hover:text-white hover:bg-primaryColor">
+        <button
+          className={`border border-mutedTextColor p-5 rounded-l-lg  shadow-md   ${
+            page === 0
+              ? "bg-[#f3f3f3] text-[#bdbdbd]"
+              : "bg-white text-primaryColor hover:bg-primaryColor hover:text-white"
+          }`}
+          onClick={() => setPage(0)}
+        >
           First
         </button>
-        {PageCount.map((data) => {
+        {(page === 0 || page === 1
+          ? [1, 2, 3]
+          : [page - 1, page, page + 1]
+        ).map((data) => {
           return (
             <button
-              className="border border-mutedTextColor py-5 w-11 text-primaryColor shadow-md hover:text-white hover:bg-primaryColor"
+              className={`border border-mutedTextColor py-5 w-11 text-primaryColor shadow-md hover:text-white hover:bg-primaryColor ${
+                page === data
+                  ? "bg-primaryColor text-white"
+                  : "bg-white text-primaryColor hover:bg-primaryColor hover:text-white"
+              }`}
               key={data}
+              value={data}
+              onClick={() => setPage(data)}
             >
               {data}
             </button>
           );
         })}
-        <button className="border border-mutedTextColor p-5 rounded-r-lg text-primaryColor shadow-md hover:text-white hover:bg-primaryColor">
+        <button
+          className="border border-mutedTextColor p-5 rounded-r-lg text-primaryColor shadow-md hover:text-white hover:bg-primaryColor"
+          onClick={() => {
+            setPage((prev) => prev + 1);
+          }}
+        >
           Next
         </button>
       </div>
