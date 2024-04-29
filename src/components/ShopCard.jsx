@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import ProductCard from "./ProductCard";
 
 export default function ShopCard() {
   return (

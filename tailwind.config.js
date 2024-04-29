@@ -19,6 +19,8 @@ export default {
         alertColor: "#E77C40",
         darkBackgroundColor: "#252B42",
         mutedTextColor: "#BDBDBD",
+        lightTextColor: "#FFFFFF",
+        lightGray2: "#ECECEC",
       },
       fontSize: {
         h1: ["58px", "font-extrabold"],
