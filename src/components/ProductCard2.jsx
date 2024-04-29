@@ -11,7 +11,7 @@ export default function ProductCard2() {
           >
             <img
               src={data.image}
-              className="sm:w-60 sm:h-[427px]  sm:object-cover"
+              className="sm:w-60 sm:h-[427px] w-48  sm:object-cover"
             />
             <div className="text-center p-5 flex flex-col gap-2">
               <h1 className="sh5 text-textColor">{data.name}</h1>
