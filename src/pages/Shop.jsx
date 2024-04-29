@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { PageCount, SubCategory } from "../mocks/ShopCardData";
 import ProductCard from "../components/ProductCard";
+import { useState } from "react";
+import ProductCard2 from "../components/ProductCard2";
 
 export default function Shop() {
+  const [display, setDisplay] = useState("grid"); /* list */
+  const [page, setPage] = useState(0);
+
   return (
     <section>
       <div className="bg-lightTextGray ">
@@ -44,8 +49,24 @@ export default function Shop() {
         <p>Showing all 12 results</p>
         <div className="flex flex-row gap-2 justify-center items-center">
           <p>Views:</p>
-          <i className="text-xl border px-2 py-1 border-lightGray2 rounded-md text-textColor hover:bg-[#F9F9F9] fa-solid fa-border-all"></i>
-          <i className="text-xl border px-2 py-1 border-lightGray2 rounded-md text-textColor hover:bg-[#F9F9F9] fa-solid fa-list"></i>
+          <button onClick={() => setDisplay("grid")}>
+            <i
+              className={`text-xl border px-2 py-1  rounded-md border-lightGray2 fa-solid fa-border-all ${
+                display === "grid"
+                  ? "bg-textColor text-white"
+                  : "bg-white text-textColor"
+              }`}
+            ></i>
+          </button>
+          <button onClick={() => setDisplay("list")}>
+            <i
+              className={`text-xl border px-2 py-1 border-lightGray2 rounded-md text-textColor fa-solid fa-list ${
+                display === "list"
+                  ? "bg-textColor text-white"
+                  : "bg-white text-textColor"
+              }`}
+            ></i>
+          </button>
         </div>
         <div className="flex flex-row gap-3 justify-center">
           <div className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7">
@@ -60,7 +81,7 @@ export default function Shop() {
           </button>
         </div>
       </div>
-      <ProductCard />
+      {display === "grid" ? <ProductCard /> : <ProductCard2 />}
       <div className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">
         <button className="border border-mutedTextColor p-5 rounded-l-lg text-primaryColor shadow-md hover:text-white hover:bg-primaryColor">
           First
