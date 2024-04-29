@@ -1,4 +1,4 @@
-import ProductCard from "../components/ProductCard";
+import BestSellerCard from "../components/BestSellerCard";
 import ShopCard from "../components/ShopCard";
 import Container from "../layout/Container";
 import Slider from "../layout/Slider";
@@ -10,7 +10,7 @@ export default function HomePage() {
     <>
       <Slider />
       <ShopCard />
-      <ProductCard />
+      <BestSellerCard />
       <Slider2 />
       <Container />
       <Blog />
