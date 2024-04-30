@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import AboutUs from "./pages/AboutUs";
+import ProductDetailCard from "./pages/ProductDetailCard";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route exact path="/cart">
           <Cart />
+        </Route>
+        <Route exact path="/shop/id">
+          <ProductDetailCard />
         </Route>
       </Switch>
       <Footer />
