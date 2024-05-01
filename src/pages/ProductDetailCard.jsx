@@ -1,12 +1,22 @@
-import ProductDetailSlider from "../components/ProductDetailSlider";
+import { useState } from "react";
+import ProductDetailSlider from "../components/ProductPageComponents/ProductDetailSlider";
+import Description from "../components/ProductPageComponents/Description";
+import AdditionalInfo from "../components/ProductPageComponents/AdditionalInfo";
+import Reviews from "../components/ProductPageComponents/Reviews";
+import ProductCard from "../components/ProductCard";
 
 export default function ProductDetailCard() {
+  const [detail, setDetail] = useState("description");
+  const [count, setCount] = useState(1);
+
   return (
-    <main className="w-screen">
-      <section className=" bg-lightTextGray">
-        <div className="max-w-[1200px] mobileCardPadding mx-auto py-8 flex flex-col sm:flex-row">
-          <ProductDetailSlider />
-          <div className="p-3 flex flex-col gap-5">
+    <main className="w-screen ">
+      <section className=" bg-lightTextGray ">
+        <div className="max-w-[1200px] mobileCardPadding mx-auto py-8 flex flex-col justify-center sm:flex-row 2xl:px-0">
+          <div>
+            <ProductDetailSlider />
+          </div>
+          <div className="p-3 flex flex-col gap-5 sm:px-10 sm:py-10 sm:w-[600px]">
             <p className="sh4 text-textColor">Floating Phone</p>
             <div className="text-[#F3CD03] flex flex-row gap-3">
               <span>
@@ -28,16 +38,26 @@ export default function ProductDetailCard() {
               sent. RELIT official consequent door ENIM RELIT Mollie. Excitation
               venial consequent sent nostrum met.
             </p>
-            <div className="border border-mutedTextColor w-4/5"></div>
+            <span className="border border-mutedTextColor"></span>
             <div className="flex flex-row gap-4 sh4 items-center my-2">
               <span>
-                <button className="bg-primaryColor px-3 py-1 rounded-l-lg text-white">
+                <button
+                  className="bg-primaryColor px-3 py-1 rounded-l-lg text-white"
+                  onClick={() => {
+                    count > 1 ? setCount((prev) => prev - 1) : "";
+                  }}
+                >
                   -
                 </button>
                 <span className="px-3 py-[5.5px] border border-y-mutedTextColor ">
-                  0
+                  {count}
                 </span>
-                <button className="bg-primaryColor px-3 py-1 rounded-r-lg text-white">
+                <button
+                  className="bg-primaryColor px-3 py-1 rounded-r-lg text-white"
+                  onClick={() => {
+                    setCount((prev) => prev + 1);
+                  }}
+                >
                   +
                 </button>
               </span>
@@ -68,10 +88,50 @@ export default function ProductDetailCard() {
         </div>
       </section>
       <section className="max-w-[1200px] bg-white mobileCardPadding mx-auto py-3">
-        <div className="sh6 text-secondTextColor flex flex-row gap-2">
-          <button>Description</button>
-          <button>Additional İnformation</button>
-          <button>Reviews</button>
+        <div className="sh6 text-secondTextColor flex flex-row gap-4 justify-center py-2">
+          <button
+            onClick={() => {
+              setDetail("description");
+            }}
+            className={`${
+              detail === "description" ? "text-black font-extrabold" : ""
+            }`}
+          >
+            Description
+          </button>
+          <div className="border border-mutedTextColor"></div>
+          <button
+            onClick={() => {
+              setDetail("addInfo");
+            }}
+            className={`${
+              detail === "addInfo" ? "text-black font-extrabold" : ""
+            }`}
+          >
+            Additional İnformation
+          </button>
+          <div className="border border-mutedTextColor"></div>
+          <button
+            onClick={() => {
+              setDetail("reviews");
+            }}
+            className={`${
+              detail === "reviews" ? "text-black font-extrabold" : ""
+            }`}
+          >
+            Reviews
+          </button>
+        </div>
+        {detail === "description" ? <Description /> : ""}
+        {detail === "addInfo" ? <AdditionalInfo /> : ""}
+        {detail === "reviews" ? <Reviews /> : ""}
+      </section>
+      <section className=" bg-lightTextGray py-3">
+        <div className="max-w-[1100px] flex flex-col justify-center mx-auto">
+          <p className="sh3 text-textColor text-center py-5 sm:text-start sm:px-2">
+            BESTSELLER PRODUCTS
+          </p>
+          <ProductCard />
         </div>
       </section>
     </main>

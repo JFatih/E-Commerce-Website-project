@@ -3,10 +3,10 @@ import { ProductCartData } from "../mocks/ProductCardData";
 
 export default function ProductCard() {
   return (
-    <div className="max-w-[1200px] flex flex-row flex-wrap gap-5 justify-start mx-auto  mobileCardPadding">
+    <div className="max-w-[1200px] flex flex-row flex-wrap gap-5 justify-start mx-auto  mobileCardPaddin">
       {ProductCartData.map((data) => {
         return (
-          <div className="mx-auto" key={data.id}>
+          <div className="mx-auto bg-white" key={data.id}>
             <Link to="/shop/id">
               <img
                 src={data.image}
