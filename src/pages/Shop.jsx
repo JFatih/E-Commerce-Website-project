@@ -3,6 +3,7 @@ import { PageCount, SubCategory } from "../mocks/ShopCardData";
 import ProductCard from "../components/ProductCard";
 import { useState } from "react";
 import ProductCard2 from "../components/ProductCard2";
+import PageNavigation from "../components/PageNavigation";
 
 export default function Shop() {
   const [display, setDisplay] = useState("grid"); /* list */
@@ -14,15 +15,7 @@ export default function Shop() {
         <div className="max-w-[1200px] mx-auto py-5">
           <div className="p-6 flex flex-col items-center text-textColor gap-10 sm:flex-row sm:justify-between">
             <p className=" sh3">Shop</p>
-            <div className="flex flex-row gap-2 slink">
-              <Link to="/">
-                <span className="hover:font-extrabold -bold">Home</span>
-              </Link>
-              {"ᐳ"}
-              <Link to="/shop">
-                <span className="hover:font-extrabold -bold">Shop</span>
-              </Link>
-            </div>
+            <PageNavigation />
           </div>
           <div className="flex flex-row flex-wrap justify-center">
             {SubCategory.map((data, index) => {

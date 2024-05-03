@@ -3,7 +3,7 @@ export const footerData = {
     title: "About Us",
     pages: {
       page1: { title: "About Us", link: "/aboutus" },
-      page2: { title: "Carrier", link: "/" },
+      page2: { title: "Team", link: "/team" },
       page3: { title: "We are hiring", link: "/" },
       page4: { title: "Blog", link: "/blog" },
     },

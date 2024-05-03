@@ -4,6 +4,7 @@ import Description from "../components/ProductPageComponents/Description";
 import AdditionalInfo from "../components/ProductPageComponents/AdditionalInfo";
 import Reviews from "../components/ProductPageComponents/Reviews";
 import ProductCard from "../components/ProductCard";
+import PageNavigation from "../components/PageNavigation";
 
 export default function ProductDetailCard() {
   const [detail, setDetail] = useState("description");
@@ -12,7 +13,10 @@ export default function ProductDetailCard() {
   return (
     <main className="w-screen ">
       <section className=" bg-lightTextGray ">
-        <div className="max-w-[1200px] mobileCardPadding mx-auto py-8 flex flex-col justify-center sm:flex-row 2xl:px-0">
+        <div className="max-w-[1200px] mobileCardPadding mx-auto pb-8 flex flex-col justify-center sm:flex-row 2xl:px-0">
+          <div className="py-10 mx-auto">
+            <PageNavigation />
+          </div>
           <div>
             <ProductDetailSlider />
           </div>

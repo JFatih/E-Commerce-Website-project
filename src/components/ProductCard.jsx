@@ -7,7 +7,7 @@ export default function ProductCard() {
       {ProductCartData.map((data) => {
         return (
           <div className="mx-auto bg-white" key={data.id}>
-            <Link to="/shop/id">
+            <Link to="/Shop/:id">
               <img
                 src={data.image}
                 className="sm:w-60 sm:h-[427px]  sm:object-cover"
