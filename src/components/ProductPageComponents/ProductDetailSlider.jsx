@@ -22,7 +22,7 @@ export default function ProductDetailSlider() {
         navigation={true}
         thumbs={thumbsSwiper && { swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="w-[320px] h-[420px] lg:w-[400px] lg:h-[500px]  flex flex-col"
+        className="w-[320px] h-[420px] lg:w-[506px] lg:h-[450px]  flex flex-col"
       >
         <SwiperSlide>
           <img
@@ -63,7 +63,7 @@ export default function ProductDetailSlider() {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="h-[100px] w-[320px] lg:w-[400px] box-border py-[10px]"
+        className="h-[100px] w-[320px] lg:w-[506px] box-border py-[10px]"
       >
         <SwiperSlide>
           <img src="https://swiperjs.com/demos/images/nature-1.jpg" />

@@ -1,10 +1,10 @@
 export default function Contact() {
   return (
-    <main className="text-white max-w-screen-2xl mx-auto relative bg-gradient-to-r from-black flex flex-col lg:flex-row justify-center items-center lg:p-20">
+    <main className="text-white max-w-screen-2xl mx-auto relative bg-gradient-to-r from-black  flex flex-col lg:flex-row justify-center items-center lg:p-20">
       <img
-        src="/contactImage.jpg"
+        src="/contactBgImage.png"
         alt="bgImage"
-        className="absolute z-[-1] w-full h-full object-cover"
+        className="absolute z-[-10] w-full h-full object-cover"
       />
       <section className="  flex flex-col gap-5 py-10 items-center mobileTextPadding text-center lg:w-2/6 lg:text-start lg:items-start lg:gap-8">
         <p className="sh2 ">CONTACT US</p>

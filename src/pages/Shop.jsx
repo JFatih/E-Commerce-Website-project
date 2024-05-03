@@ -10,8 +10,8 @@ export default function Shop() {
   const [page, setPage] = useState(0);
 
   return (
-    <section>
-      <div className="bg-lightTextGray ">
+    <main>
+      <section className="bg-lightTextGray ">
         <div className="max-w-[1200px] mx-auto py-5">
           <div className="p-6 flex flex-col items-center text-textColor gap-10 sm:flex-row sm:justify-between">
             <p className=" sh3">Shop</p>
@@ -37,8 +37,8 @@ export default function Shop() {
             })}
           </div>
         </div>
-      </div>
-      <div className=" max-w-[1200px] mx-auto text-secondTextColor sh6 text-center flex flex-col gap-6 py-6 items-center sm:flex-row sm:justify-between">
+      </section>
+      <section className=" max-w-[1200px] mx-auto text-secondTextColor sh6 text-center flex flex-col gap-6 py-6 items-center sm:flex-row sm:justify-between">
         <p>Showing all 12 results</p>
         <div className="flex flex-row gap-2 justify-center items-center">
           <p>Views:</p>
@@ -73,9 +73,9 @@ export default function Shop() {
             Filter
           </button>
         </div>
-      </div>
+      </section>
       {display === "grid" ? <ProductCard /> : <ProductCard2 />}
-      <div className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">
+      <section className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">
         <button
           className={`border border-mutedTextColor p-5 rounded-l-lg  shadow-md   ${
             page === 0
@@ -113,7 +113,7 @@ export default function Shop() {
         >
           Next
         </button>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
