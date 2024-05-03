@@ -10,35 +10,41 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import AboutUs from "./pages/AboutUs";
 import ProductDetailCard from "./pages/ProductDetailCard";
+import Team from "./pages/TeamPage/Team";
 
 function App() {
   return (
     <>
       <Header />
+
       <Switch>
-        <Route exact path="/">
-          <HomePage />
+        <Route path="/shop/:id2">
+          <ProductDetailCard />
         </Route>
-        <Route exact path="/shop">
+        <Route path="/shop">
           <Shop />
         </Route>
-        <Route exact path="/aboutus">
+        <Route path="/about-us">
           <AboutUs />
         </Route>
-        <Route exact path="/blog">
+        <Route path="/blog">
           <Blog />
         </Route>
-        <Route exact path="/contact">
+        <Route path="/contact">
           <Contact />
         </Route>
-        <Route exact path="/login">
+        <Route path="/login">
           <Login />
         </Route>
-        <Route exact path="/cart">
+        <Route path="/cart">
           <Cart />
         </Route>
-        <Route exact path="/shop/id">
-          <ProductDetailCard />
+
+        <Route path="/team">
+          <Team />
+        </Route>
+        <Route path="/">
+          <HomePage />
         </Route>
       </Switch>
       <Footer />
