@@ -1,4 +1,5 @@
 import PageNavigation from "../components/PageNavigation";
+import TextImageCard from "../components/TextImageCard";
 
 const contactData = {
   phone: {
@@ -28,6 +29,33 @@ const contactData = {
   },
 };
 
+const TextImageCardData = {
+  subTitle: "CONTACT US",
+  title: "Get İn touch today!",
+  paragraph:
+    "We know how large objects will act, but things on a small scale just do not act that way.",
+  subParagraph: ["Phone : +451 215 215", "Fax : +451 215 215"],
+  icon: {
+    twitter: {
+      link: "https://twitter.com/home",
+      icon: <i className="fa-brands fa-twitter"></i>,
+    },
+    facebook: {
+      link: "https://facebook.com",
+      icon: <i className="fa-brands fa-square-facebook"></i>,
+    },
+    instagram: {
+      link: "https://instagram.com",
+      icon: <i className="fa-brands fa-instagram"></i>,
+    },
+    linkedin: {
+      link: "https://linkedin.com",
+      icon: <i className="fa-brands fa-linkedin"></i>,
+    },
+  },
+  image: { link: "/contactUs/contactUsImage.png", altText: "Shopping Family" },
+};
+
 export default function ContactUs() {
   return (
     <main>
@@ -36,46 +64,7 @@ export default function ContactUs() {
           <PageNavigation />
         </span>
       </div>
-      <section className="flex flex-row flex-wrap max-w-[1200px] mx-auto md:justify-around md:items-center">
-        <div className="text-textColor flex flex-col gap-5 items-center text-center mobileTextPadding lg:w-2/6 md:w-3/6 md:text-start md:items-start">
-          <p className="sh5 ">CONTACT US</p>
-          <p className="sh2">Get İn touch today!</p>
-          <p className="sh4 text-secondTextColor">
-            We know how large objects will act, but things on a small scale just
-            do not act that way.
-          </p>
-          <p className="sh3">Phone : +451 215 215</p>
-          <p className="sh3">Fax : +451 215 215</p>
-          <div className="sh3 flex gap-5">
-            <a href="https://twitter.com/home">
-              <i className="fa-brands fa-twitter"></i>
-            </a>
-            <a href="https://facebook.com">
-              <i className="fa-brands fa-square-facebook"></i>
-            </a>
-
-            <a href="https://instagram.com">
-              <i className="fa-brands fa-instagram"></i>
-            </a>
-
-            <a href="https://linkedin.com">
-              <i className="fa-brands fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-        <div className="relative flex justify-center px-4 md:w-3/6 ">
-          <img
-            src="/contactUs/contactUsImage.png"
-            alt="Shopping Family"
-            className="w-[387px] h-[440px] lg:w-[571px] lg:h-[826px] relative z-10 object-cover"
-          />
-          <span className="absolute h-[47px] w-[47px] rounded-full bg-[#FFE9EA] top-10 left-3 z-[-1]"></span>
-          <span className="absolute h-[295.65px] w-[295.65px] rounded-full bg-[#FFE9EA] top-7 z-[-1]"></span>
-          <span className="absolute h-[18.48px] w-[18.48px] rounded-full bg-[#FFE9EA] top-52 right-6 z-[-1]"></span>
-          <span className="absolute h-[9.02px] w-[9.02px] rounded-full bg-[#977DF4] top-32 right-5 z-[-1]"></span>
-          <span className="absolute h-[9.02px] w-[9.02px] rounded-full bg-[#977DF4] bottom-32 left-6 z-[-1]"></span>
-        </div>
-      </section>
+      <TextImageCard data={TextImageCardData} />
       <section className=" bg-lightTextGray w-screen py-5">
         <div className="max-w-[1200px] mx-auto w-screen">
           <div className="text-textColor mobileTextPadding text-center">
