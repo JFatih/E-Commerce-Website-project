@@ -24,12 +24,11 @@ export default function PageNavigation() {
   };
 
   /* const tikla = () => {
-    console.log(pageName);
-    console.log(path);
-    console.log(toPath(1));
+    console.log(location);
   }; */
   return (
     <div className="flex flex-row gap-2 slink items-center">
+      {/* <button onClick={tikla}>kilik</button> */}
       <Link to="/">
         <span className="hover:font-extrabold -bold">Home</span>
       </Link>

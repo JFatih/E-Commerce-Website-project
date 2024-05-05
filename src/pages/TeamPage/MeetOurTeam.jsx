@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { teamData } from "../../mocks/teamData";
 
 export default function MeetOurTeam() {

@@ -5,18 +5,21 @@ import Header from "./layout/Header";
 import HomePage from "./pages/HomePage";
 import Shop from "./pages/Shop";
 import Blog from "./pages/Blog";
-import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import AboutUs from "./pages/AboutUs";
 import ProductDetailCard from "./pages/ProductDetailCard";
 import Team from "./pages/TeamPage/Team";
+import ContactUs from "./pages/ContactUs";
+import PageNavigation from "./components/PageNavigation";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
+  /* const location = useLocation(); */
   return (
     <>
       <Header />
-
+      {/* {location.pathname === "/" ? "" : <PageNavigation />} */}
       <Switch>
         <Route path="/shop/:id2">
           <ProductDetailCard />
@@ -30,8 +33,8 @@ function App() {
         <Route path="/blog">
           <Blog />
         </Route>
-        <Route path="/contact">
-          <Contact />
+        <Route path="/contact-us">
+          <ContactUs />
         </Route>
         <Route path="/login">
           <Login />
@@ -39,7 +42,6 @@ function App() {
         <Route path="/cart">
           <Cart />
         </Route>
-
         <Route path="/team">
           <Team />
         </Route>

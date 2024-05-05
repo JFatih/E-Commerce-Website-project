@@ -1,4 +1,4 @@
-export default function Contact() {
+export default function ContactUsPart() {
   return (
     <main className="text-white max-w-screen-2xl mx-auto relative bg-gradient-to-r from-black  flex flex-col lg:flex-row justify-center items-center lg:p-20">
       <img

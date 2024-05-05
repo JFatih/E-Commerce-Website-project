@@ -3,5 +3,5 @@ export const headerData = [
   { name: "Shop", link: "/shop" },
   { name: "About Us", link: "/about-us" },
   { name: "Blog", link: "/blog" },
-  { name: "Contact", link: "/contact" },
+  { name: "Contact Us", link: "/contact-us" },
 ];
