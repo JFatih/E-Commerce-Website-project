@@ -2,7 +2,7 @@ export const footerData = {
   base1: {
     title: "About Us",
     pages: {
-      page1: { title: "About Us", link: "/aboutus" },
+      page1: { title: "About Us", link: "/about-us" },
       page2: { title: "Team", link: "/team" },
       page3: { title: "We are hiring", link: "/" },
       page4: { title: "Blog", link: "/blog" },
@@ -11,7 +11,7 @@ export const footerData = {
   base2: {
     title: "Legal",
     pages: {
-      page1: { title: "About Us", link: "/aboutus" },
+      page1: { title: "About Us", link: "/about-us" },
       page2: { title: "Carrier", link: "/" },
       page3: { title: "We are hiring", link: "/" },
       page4: { title: "Blog", link: "/blog" },

@@ -21,6 +21,8 @@ export default {
         mutedTextColor: "#BDBDBD",
         lightTextColor: "#FFFFFF",
         lightGray2: "#ECECEC",
+        dangerTextColor: "#E74040",
+        hoverColor: "#2A7CC7",
       },
       fontSize: {
         h1: ["58px", "font-extrabold"],

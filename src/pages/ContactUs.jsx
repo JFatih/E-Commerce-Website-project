@@ -53,17 +53,18 @@ const TextImageCardData = {
       icon: <i className="fa-brands fa-linkedin"></i>,
     },
   },
-  image: { link: "/contactUs/contactUsImage.png", altText: "Shopping Family" },
+  image: {
+    link: "/contactUs/contactUsImage.png",
+    altText: "Shopping Family",
+    className: "h-[440px] lg:h-[826px]",
+  },
+  button: { name: "", link: "" },
 };
 
 export default function ContactUs() {
   return (
     <main>
-      <div className="px-8">
-        <span className="max-w-[1200px] flex flex-row justify-center sm:justify-start  mx-auto">
-          <PageNavigation />
-        </span>
-      </div>
+      <div className="px-8"></div>
       <TextImageCard data={TextImageCardData} />
       <section className=" bg-lightTextGray w-screen py-5">
         <div className="max-w-[1200px] mx-auto w-screen">
