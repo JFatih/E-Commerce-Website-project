@@ -1,4 +1,4 @@
-import MeetOurTeam from "./MeetOurTeam";
+import MeetOurTeam from "../../components/MeetOurTeam";
 import PageNavigation from "../../components/PageNavigation";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 

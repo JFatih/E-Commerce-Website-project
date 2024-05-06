@@ -27,19 +27,22 @@ export default function PageNavigation() {
     console.log(location);
   }; */
   return (
-    <div className="flex flex-row gap-2 slink items-center">
+    <div className="flex flex-row gap-2 slink items-center max-w-[1200px] mx-auto">
       {/* <button onClick={tikla}>kilik</button> */}
       <Link to="/">
         <span className="hover:font-extrabold -bold">Home</span>
       </Link>
       {pageName.map((data, index) => {
         return (
-          <>
+          <span
+            className="flex flex-row gap-2 justify-center items-center"
+            key={index}
+          >
             <i className="fa-solid fa-angle-right"></i>
             <Link to={toPath(index)}>
               <span className="hover:font-extrabold -bold">{data}</span>
             </Link>
-          </>
+          </span>
         );
       })}
     </div>

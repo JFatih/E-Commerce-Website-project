@@ -1,4 +1,4 @@
-import { teamData } from "../../mocks/teamData";
+import { teamData } from "../mocks/teamData";
 
 export default function MeetOurTeam() {
   return (
