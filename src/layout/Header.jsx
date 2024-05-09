@@ -64,7 +64,7 @@ export default function Header() {
             <Link to="/cart">
               <i className="fa-solid fa-cart-shopping"></i>
             </Link>
-            <Link to="/login" className="flex items-center gap-2">
+            <Link to="/signup" className="flex items-center gap-2">
               <i className="fa-regular fa-user"></i>
               <p className="text-[17px] hidden sm:flex">Login/Register</p>
             </Link>
