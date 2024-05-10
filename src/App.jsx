@@ -5,7 +5,6 @@ import Header from "./layout/Header";
 import HomePage from "./pages/HomePage";
 import Shop from "./pages/Shop";
 import Blog from "./pages/Blog";
-import LoginRegister from "./pages/RegisterLogin/LoginRegister";
 import Cart from "./pages/Cart";
 import AboutUs from "./pages/AboutUs";
 import ProductDetailCard from "./pages/ProductDetailCard";
@@ -13,15 +12,11 @@ import Team from "./pages/TeamPage/Team";
 import ContactUs from "./pages/ContactUs";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { setRoles } from "./store/action/ClientReducerAction";
-
+import LoginRegister from "./pages/RegisterLogin/LoginRegister";
 function App() {
   return (
     <>
       <Header />
-
       <Switch>
         <Route path="/shop/:id2">
           <ProductDetailCard />

@@ -211,7 +211,7 @@ export default function StoreRegister({ setCustomer, rolesData }) {
         {loading ? (
           <button
             type="submit"
-            className="px-16 py-4 bg-textColor text-white rounded-lg my-2 flex justify-center items-center"
+            className="px-16 py-4 bg-primaryColor text-white rounded-lg my-2 flex justify-center items-center"
             disabled={!isValid}
           >
             <RotatingLines
@@ -225,7 +225,7 @@ export default function StoreRegister({ setCustomer, rolesData }) {
         ) : (
           <button
             type="submit"
-            className="px-16 py-4 bg-textColor text-white rounded-lg my-2"
+            className="sh5 px-16 py-4 bg-primaryColor text-white rounded-lg my-2"
             disabled={!isValid}
           >
             Sign Up
