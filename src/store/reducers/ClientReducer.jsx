@@ -20,7 +20,6 @@ const ClientReducer = (state = initialValue, action) => {
     case ClientUser:
       return { ...state, user: { ...state.user, ...action.payload } };
     case ClientRoles:
-      console.log({ ...state, user: { roles: action.payload } });
       return { ...state, user: { roles: action.payload } };
     case ClientTheme:
       return { ...state, user: { theme: action.payload } };
