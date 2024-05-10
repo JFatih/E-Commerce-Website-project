@@ -20,11 +20,12 @@ const ClientReducer = (state = initialValue, action) => {
     case ClientUser:
       return { ...state, user: { ...state.user, ...action.payload } };
     case ClientRoles:
-      return { ...state, user: { ...state.user.roles, ...action.payload } };
+      console.log({ ...state, user: { roles: action.payload } });
+      return { ...state, user: { roles: action.payload } };
     case ClientTheme:
-      return { ...state, user: { ...state.user.theme, ...action.payload } };
+      return { ...state, user: { theme: action.payload } };
     case ClientLanguage:
-      return { ...state, user: { ...state.user.language, ...action.payload } };
+      return { ...state, user: { language: action.payload } };
     default:
       return state;
   }
