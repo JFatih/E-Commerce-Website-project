@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { legacy_createStore as createStore } from "redux";
 import { combineReducers, applyMiddleware } from "redux";
 import ClientReducer from "./reducers/ClientReducer.jsx";
 import ProductReducer from "./reducers/ProductReducer.jsx";
