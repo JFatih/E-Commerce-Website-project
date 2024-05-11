@@ -9,13 +9,16 @@ export const setUser = (user) => {
   return { type: ClientUser, payload: user };
 };
 
-export const setRoles = (creds) => (dispatch, getState) => {
-  axios
-    .get("https://workintech-fe-ecommerce.onrender.com/roles", creds)
-    .then((res) => {
-      const UserAction = { type: ClientRoles, payload: res.data };
-      dispatch(UserAction);
-    });
+export const setRoles = (creds) => async (dispatch, getState) => {
+  try {
+    const res = await axios.get(
+      "https://workintech-fe-ecommerce.onrender.com/roles",
+      creds
+    );
+    dispatch({ type: ClientRoles, payload: res.data });
+  } catch (error) {
+    console.log("Roles dataalınamadı", error);
+  }
 };
 
 export const setTheme = (theme) => {
