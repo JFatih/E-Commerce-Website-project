@@ -17,7 +17,7 @@ export const setRoles = (creds) => async (dispatch, getState) => {
     );
     dispatch({ type: ClientRoles, payload: res.data });
   } catch (error) {
-    console.log("Roles dataalınamadı", error);
+    console.log("Roles data alınamadı", error);
   }
 };
 

@@ -13,6 +13,7 @@ import ContactUs from "./pages/ContactUs";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LoginRegister from "./pages/RegisterLogin/LoginRegister";
+import SignIn from "./pages/SignIn";
 function App() {
   return (
     <>
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <LoginRegister />
+        </Route>
+        <Route path="/signin">
+          <SignIn />
         </Route>
         <Route path="/cart">
           <Cart />

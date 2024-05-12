@@ -64,10 +64,18 @@ export default function Header() {
             <Link to="/cart">
               <i className="fa-solid fa-cart-shopping"></i>
             </Link>
-            <Link to="/signup" className="flex items-center gap-2">
-              <i className="fa-regular fa-user"></i>
-              <p className="text-[17px] hidden sm:flex">Login/Register</p>
-            </Link>
+            <div className="flex flex-row gap-1">
+              <Link to="/" className="flex items-center gap-2">
+                <i className="fa-regular fa-user"></i>
+              </Link>
+              <Link to="/signup" className="flex items-center gap-2">
+                <p className="text-[17px] hidden sm:flex">Register</p>
+              </Link>
+              <p className="hidden sm:block">/</p>
+              <Link to="/signin" className="flex items-center gap-2">
+                <p className="text-[17px] hidden sm:flex">Login</p>
+              </Link>
+            </div>
             <button
               className="flex lg:hidden fa-solid fa-bars"
               onClick={toggleMenu}
