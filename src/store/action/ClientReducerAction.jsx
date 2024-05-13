@@ -9,7 +9,7 @@ export const setUser = (user) => {
   return { type: ClientUser, payload: user };
 };
 
-export const setRoles = (creds) => async (dispatch, getState) => {
+export const setRoles = () => async (dispatch) => {
   try {
     const res = await axios.get(
       "https://workintech-fe-ecommerce.onrender.com/roles"
