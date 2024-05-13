@@ -13,7 +13,8 @@ import ContactUs from "./pages/ContactUs";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LoginRegister from "./pages/RegisterLogin/LoginRegister";
-import SignIn from "./pages/SignIn";
+import SignIn from "./pages/RegisterLogin/SignIn";
+
 function App() {
   return (
     <>
