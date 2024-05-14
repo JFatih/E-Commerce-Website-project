@@ -14,8 +14,28 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LoginRegister from "./pages/RegisterLogin/LoginRegister";
 import SignIn from "./pages/RegisterLogin/SignIn";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUserfromToken } from "./store/action/ClientReducerAction";
+import instance from "./hooks/axiosInstance";
 
 function App() {
+  const dispatch = useDispatch();
+  const verifyToken = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await instance.get("/verify", {
+        headers: { Authorization: token },
+      });
+      dispatch(setUserfromToken(response.data));
+    } catch (err) {
+      localStorage.removeItem("token");
+    }
+  };
+
+  useEffect(() => {
+    verifyToken();
+  }, []);
   return (
     <>
       <Header />
