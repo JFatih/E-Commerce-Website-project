@@ -1,13 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { headerData } from "../mocks/headerdata";
+import { useSelector } from "react-redux";
+import CryptoJS from "crypto-js";
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
-
   const toggleMenu = () => {
     setMenu(!menu);
   };
+  const userEmail = useSelector((store) => store.Client.user);
+  useEffect(() => {
+    if (userEmail.email) {
+      const hashedEmail = CryptoJS.SHA256(userEmail);
+      const gravatarUrl = `https://www.gravatar.com/avatar/${hashedEmail}`;
+      document.getElementById("gravatar-image").src = gravatarUrl;
+    }
+  }, [userEmail]);
 
   return (
     <header className="">
@@ -65,16 +74,28 @@ export default function Header() {
               <i className="fa-solid fa-cart-shopping"></i>
             </Link>
             <div className="flex flex-row gap-1">
-              <Link to="/" className="flex items-center gap-2">
-                <i className="fa-regular fa-user"></i>
-              </Link>
-              <Link to="/signup" className="flex items-center gap-2">
-                <p className="text-[17px] hidden sm:flex">Register</p>
-              </Link>
-              <p className="hidden sm:block">/</p>
-              <Link to="/signin" className="flex items-center gap-2">
-                <p className="text-[17px] hidden sm:flex">Login</p>
-              </Link>
+              {userEmail.email ? (
+                <Link to="/" className="flex items-center gap-2">
+                  <div className="flex flex-row gap-2 items-center text-[17px]">
+                    <img
+                      id="gravatar-image"
+                      alt="Gravatar"
+                      className="rounded-full w-8 h-8"
+                    />
+                    <p>{userEmail.name}</p>
+                  </div>
+                </Link>
+              ) : (
+                <>
+                  <Link to="/signup" className="flex items-center gap-2">
+                    <p className="text-[17px] hidden sm:flex">Register</p>
+                  </Link>
+                  <p className="hidden sm:block">/</p>
+                  <Link to="/signin" className="flex items-center gap-2">
+                    <p className="text-[17px] hidden sm:flex">Login</p>
+                  </Link>
+                </>
+              )}
             </div>
             <button
               className="flex lg:hidden fa-solid fa-bars"

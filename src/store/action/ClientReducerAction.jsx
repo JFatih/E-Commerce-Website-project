@@ -5,20 +5,27 @@ export const ClientRoles = "Client Roles";
 export const ClientTheme = "Client Theme";
 export const ClientLanguage = "Client Language";
 
-export const setUser = (data, creds) => async (dispatch, getState) => {
+const instance = axios.create({
+  baseURL: "https://workintech-fe-ecommerce.onrender.com/",
+  timeout: 1000,
+});
+
+export const setUser = (creds) => async (dispatch) => {
+  const data1 = { ...creds };
+  delete data1.remember;
   try {
-    const res = await axios.post(
-      "https://workintech-fe-ecommerce.onrender.com/login",
-      data
-    );
+    const res = await instance.post("login", data1);
     dispatch({ type: ClientUser, payload: res.data });
-    console.log(res.data);
+    if (creds.remember) {
+      localStorage.setItem("token", res.data.token);
+    }
+    return res;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
-export const setRoles = (creds) => async (dispatch, getState) => {
+export const setRoles = () => async (dispatch) => {
   try {
     const res = await axios.get(
       "https://workintech-fe-ecommerce.onrender.com/roles"

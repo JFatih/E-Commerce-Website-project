@@ -14,12 +14,13 @@ const instance = axios.create({
 });
 
 export default function SignIn() {
-  const dispatch = useDispatch();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const defaultValues = {
     email: "",
     password: "",
+    remember: "",
   };
 
   const {
@@ -31,8 +32,18 @@ export default function SignIn() {
     mode: "all",
   });
 
-  const onSubmit = (data) => {
-    dispatch(setUser(data));
+  const onSubmit = async (data) => {
+    try {
+      const res = await dispatch(setUser(data));
+      console.log("res:", res);
+      if (res.status === 200) {
+        history.goBack() || history.push("/");
+      } else if (res.response.status === 401) {
+        toast.error(res.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -64,6 +75,17 @@ export default function SignIn() {
             className="border  h-10 px-5 my-2"
             placeholder="Password"
           />
+          <div className="flex flex-row gap-1 justify-start items-center">
+            <label>
+              <input
+                type="checkbox"
+                {...register("remember")}
+                placeholder="Remember Me!"
+                className="w-5"
+              />
+              Remember Me!
+            </label>
+          </div>
           {loading ? (
             <button
               type="submit"

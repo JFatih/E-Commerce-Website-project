@@ -11,12 +11,12 @@ const instance = axios.create({
 });
 
 export default function LoginRegister() {
+  const rolesData = useSelector((store) => store.Client.user.roles);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setRoles());
   }, []);
-
-  const rolesData = useSelector((store) => store.Client.user.roles);
 
   const [customer, setCustomer] = useState("customerRegister");
   /* const [rolesData, setRolesData] = useState(null);
