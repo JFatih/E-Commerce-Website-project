@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { RotatingLines } from "react-loader-spinner";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com",
@@ -177,7 +178,9 @@ export default function CustomerRegister({ setCustomer, rolesData }) {
         )}
       </form>
       <div className="flex flex-row  justify-around">
-        <button className="text-textColor sh5 mx-2">Sign In</button>
+        <Link to="/signin">
+          <button className="text-textColor sh5 mx-2">Sign In</button>
+        </Link>
         <button
           className="text-textColor sh5 mx-2"
           onClick={() => {
