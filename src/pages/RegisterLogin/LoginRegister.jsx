@@ -18,6 +18,8 @@ export default function LoginRegister() {
     dispatch(setRoles());
   }, []);
 
+  const rolesData = useSelector((store) => store.Client.user.roles);
+
   const [customer, setCustomer] = useState("customerRegister");
   /* const [rolesData, setRolesData] = useState(null);
   useEffect(() => {
