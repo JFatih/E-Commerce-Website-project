@@ -14,6 +14,7 @@ export default function Header() {
     if (userEmail.email) {
       const hashedEmail = CryptoJS.SHA256(userEmail);
       const gravatarUrl = `https://www.gravatar.com/avatar/${hashedEmail}`;
+      console.log(hashedEmail);
       document.getElementById("gravatar-image").src = gravatarUrl;
     }
   }, [userEmail]);
