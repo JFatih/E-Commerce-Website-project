@@ -35,7 +35,6 @@ export default function SignIn() {
   const onSubmit = async (data) => {
     try {
       const res = await dispatch(setUser(data));
-      console.log("res:", res);
       if (res.status === 200) {
         history.goBack() || history.push("/");
       } else if (res.response.status === 401) {

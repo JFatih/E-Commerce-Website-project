@@ -25,6 +25,10 @@ export const setUser = (creds) => async (dispatch) => {
   }
 };
 
+export const setUserfromToken = (creds) => {
+  return { type: ClientUser, payload: creds };
+};
+
 export const setRoles = () => async (dispatch) => {
   try {
     const res = await axios.get(
