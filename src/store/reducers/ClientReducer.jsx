@@ -9,10 +9,10 @@ const initialValue = {
   user: {
     addressList: [],
     creditCards: [],
-    roles: [],
-    theme: "",
-    language: "",
   },
+  roles: [],
+  theme: "",
+  language: "",
 };
 
 const ClientReducer = (state = initialValue, action) => {
@@ -25,12 +25,12 @@ const ClientReducer = (state = initialValue, action) => {
     case ClientRoles:
       return {
         ...state,
-        user: { ...state.user, roles: action.payload },
+        roles: action.payload,
       };
     case ClientTheme:
-      return { ...state, user: { ...state.user, theme: action.payload } };
+      return { ...state, theme: action.payload };
     case ClientLanguage:
-      return { ...state, user: { ...state.user, language: action.payload } };
+      return { ...state, language: action.payload };
     default:
       return state;
   }

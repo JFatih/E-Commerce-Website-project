@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/action/ClientReducerAction";
+import { fetchUser, setUser } from "../../store/action/ClientReducerAction";
 
 const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com",
@@ -32,17 +32,8 @@ export default function SignIn() {
     mode: "all",
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const res = await dispatch(setUser(data));
-      if (res.status === 200) {
-        history.goBack() || history.push("/");
-      } else if (res.response.status === 401) {
-        toast.error(res.message);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+  const onSubmit = (creds) => {
+    dispatch(fetchUser(creds, history));
   };
 
   return (
