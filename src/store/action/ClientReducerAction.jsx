@@ -5,7 +5,7 @@ export const ClientRoles = "Client Roles";
 export const ClientTheme = "Client Theme";
 export const ClientLanguage = "Client Language";
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com/",
   timeout: 1000,
 });

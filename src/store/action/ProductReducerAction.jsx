@@ -1,3 +1,5 @@
+import { instance } from "./ClientReducerAction";
+
 export const Categories = "Api Categories";
 export const ProductList = "Api Product List";
 export const Total = "Total Products";
@@ -7,6 +9,9 @@ export const Offset = "Offset for Pagination";
 export const Filter = "Filter Products";
 
 export const setCategories = (user) => {
+  try {
+    const res = await instance.get("/categories")
+  }
   return { type: Categories, payload: user };
 };
 
