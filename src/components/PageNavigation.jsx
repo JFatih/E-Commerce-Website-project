@@ -23,12 +23,8 @@ export default function PageNavigation() {
     return pathName;
   };
 
-  /* const tikla = () => {
-    console.log(location);
-  }; */
   return (
-    <div className="flex flex-row gap-2 slink items-center max-w-[1200px] mx-auto">
-      {/* <button onClick={tikla}>kilik</button> */}
+    <div className="flex flex-row gap-2 slink items-center max-w-[1200px] ">
       <Link to="/">
         <span className="hover:font-extrabold -bold">Home</span>
       </Link>

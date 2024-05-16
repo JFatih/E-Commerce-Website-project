@@ -8,7 +8,7 @@ export const ClientLanguage = "Client Language";
 
 export const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com/",
-  timeout: 1000,
+  timeout: 3000,
 });
 
 export const setUser = (data) => {
@@ -17,10 +17,6 @@ export const setUser = (data) => {
 
 export const setRoles = (data) => {
   return { type: ClientRoles, payload: data };
-};
-
-export const setUserfromToken = (creds) => {
-  return { type: ClientUser, payload: creds };
 };
 
 export const setTheme = (theme) => {
@@ -39,6 +35,7 @@ export const fetchUser = (creds, history) => async (dispatch) => {
     dispatch(setUser(res.data));
     if (creds.remember) {
       localStorage.setItem("token", res.data.token);
+      instance.defaults.headers.common["token"] = res.data.token;
     }
     history.goBack() || history.push("/");
   } catch (err) {

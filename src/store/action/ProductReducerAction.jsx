@@ -8,12 +8,14 @@ export const Limit = "Product Count on the Page";
 export const Offset = "Offset for Pagination";
 export const Filter = "Filter Products";
 
-/* export const setCategories = (user) => {
+export const setCategories = () => async (dispatch) => {
   try {
-    const res = await instance.get("/categories")
+    const res = await instance.get("/categories");
+    dispatch({ type: Categories, payload: res.data });
+  } catch (err) {
+    console.log(err);
   }
-  return { type: Categories, payload: user };
-}; */
+};
 
 export const setProductList = (user) => {
   return { type: ProductList, payload: user };

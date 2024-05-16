@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
-import { PageCount, SubCategory } from "../mocks/ShopCardData";
+import { SubCategory } from "../mocks/ShopCardData";
 import ProductCard from "../components/ProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard2 from "../components/ProductCard2";
 import PageNavigation from "../components/PageNavigation";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 export default function Shop() {
-  const [display, setDisplay] = useState("grid"); /* list */
+  const [display, setDisplay] = useState("grid");
   const [page, setPage] = useState(0);
+  let { category, SubCategory } = useParams();
+
+  const categoryData = useSelector((store) => store.Product.categories);
+
+  const useCategoryData = categoryData
+    .sort((a, b) => b.rating - a.rating)
+    .filter(
+      (data) =>
+        data.gender.toLowerCase() ===
+        (category === "men" ? "e" : category === "women" ? "k" : "")
+    )
+    .slice(0, 5);
 
   return (
     <main>
@@ -18,18 +32,18 @@ export default function Shop() {
             <PageNavigation />
           </div>
           <div className="flex flex-row flex-wrap justify-center">
-            {SubCategory.map((data, index) => {
+            {useCategoryData.map((data) => {
               return (
-                <Link to={data.link} key={index}>
+                <Link to={`/shop/${category}/${data.title}`} key={data.title}>
                   <div className="relative flex justify-center items-center text-center sh5 text-lightTextColor sm:p-2 mobileCardPadding py-3">
                     <img
-                      src={data.image}
-                      alt={data.name}
+                      src={data.img}
+                      alt={data.title}
                       className=" w-[332px] h-[300px] md:w-[205px] md:h-[223px] object-cover object-top "
                     />
                     <div className="absolute z-50 text-white">
-                      <p className="p-3">{data.name}</p>
-                      <p className="p-3">{data.items} Items</p>
+                      <p className="p-3">{data.title}</p>
+                      <p className="p-3">{data.title} Items</p>
                     </div>
                   </div>
                 </Link>
