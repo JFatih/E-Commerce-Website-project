@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { SubCategory } from "../mocks/ShopCardData";
 import ProductCard from "../components/ProductCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProductCard2 from "../components/ProductCard2";
 import PageNavigation from "../components/PageNavigation";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -20,9 +19,11 @@ export default function Shop() {
       (data) =>
         data.gender.toLowerCase() ===
         (category === "men" ? "e" : category === "women" ? "k" : "")
-    )
-    .slice(0, 5);
+    );
 
+  console.log("Category:", category);
+  console.log("SubCategory:", SubCategory);
+  console.log("useCategoryData:", useCategoryData);
   return (
     <main>
       <section className="bg-lightTextGray ">
@@ -32,23 +33,34 @@ export default function Shop() {
             <PageNavigation />
           </div>
           <div className="flex flex-row flex-wrap justify-center">
-            {useCategoryData.map((data) => {
-              return (
-                <Link to={`/shop/${category}/${data.title}`} key={data.title}>
-                  <div className="relative flex justify-center items-center text-center sh5 text-lightTextColor sm:p-2 mobileCardPadding py-3">
-                    <img
-                      src={data.img}
-                      alt={data.title}
-                      className=" w-[332px] h-[300px] md:w-[205px] md:h-[223px] object-cover object-top "
-                    />
-                    <div className="absolute z-50 text-white">
-                      <p className="p-3">{data.title}</p>
-                      <p className="p-3">{data.title} Items</p>
+            {useCategoryData
+              .filter((data) => {
+                if (SubCategory) {
+                  return data.title !== SubCategory;
+                }
+                return true;
+              })
+              .slice(0, 5)
+              .map((data) => {
+                return (
+                  <Link
+                    to={`/shop/${category}/${data.title.toLowerCase()}`}
+                    key={data.title}
+                  >
+                    <div className="relative flex justify-center items-center text-center sh5 text-lightTextColor sm:p-2 mobileCardPadding py-3">
+                      <img
+                        src={data.img}
+                        alt={data.title}
+                        className=" w-[332px] h-[300px] md:w-[205px] md:h-[223px] object-cover object-top "
+                      />
+                      <div className="absolute z-50 text-white">
+                        <p className="p-3">{data.title}</p>
+                        <p className="p-3">{data.title} Items</p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
+                  </Link>
+                );
+              })}
           </div>
         </div>
       </section>

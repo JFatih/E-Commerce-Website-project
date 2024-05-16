@@ -35,7 +35,7 @@ function App() {
         <Route path="/product">
           <ProductDetailCard />
         </Route>
-        <Route path="/shop/:category/:subCategory">
+        <Route path="/shop/:category/:SubCategory">
           <Shop />
         </Route>
         <Route path="/shop/:category">
