@@ -5,13 +5,16 @@ import ProductCard2 from "../components/ProductCard2";
 import PageNavigation from "../components/PageNavigation";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector } from "react-redux";
+import { RotatingLines } from "react-loader-spinner";
 
-export default function Shop() {
+export default function Shop({ productLoading }) {
   const [display, setDisplay] = useState("grid");
   const [page, setPage] = useState(0);
   let { category, SubCategory } = useParams();
 
   const categoryData = useSelector((store) => store.Product.categories);
+  const productsList = useSelector((store) => store.Product.productList);
+  console.log(productsList);
 
   const useCategoryData = categoryData
     .sort((a, b) => b.rating - a.rating)
@@ -100,7 +103,19 @@ export default function Shop() {
           </button>
         </div>
       </section>
-      {display === "grid" ? <ProductCard /> : <ProductCard2 />}
+      {productLoading ? (
+        <RotatingLines
+          strokeColor="white"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="24"
+          visible={true}
+        />
+      ) : display === "grid" ? (
+        <ProductCard productsList={productsList} />
+      ) : (
+        <ProductCard2 productsList={productsList} />
+      )}
       <section className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">
         <button
           className={`border border-mutedTextColor p-5 rounded-l-lg  shadow-md   ${

@@ -28,7 +28,7 @@ const ProductReducer = (state = initialValue, action) => {
     case ProductList:
       return {
         ...state,
-        productList: { ...state.productList, ...action.payload },
+        productList: action.payload,
       };
     case Total:
       return { ...state, total: action.payload };
