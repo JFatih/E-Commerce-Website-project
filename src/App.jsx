@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Footer from "./layout/Footer";
-import Header from "./layout/Header";
+import Header from "./layout/header/Header";
 import HomePage from "./pages/HomePage";
 import Shop from "./pages/Shop";
 import Blog from "./pages/Blog";
@@ -17,6 +17,7 @@ import SignIn from "./pages/RegisterLogin/SignIn";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUserWToken } from "./store/action/ClientReducerAction";
+import { setCategories } from "./store/action/ProductReducerAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,15 +26,19 @@ function App() {
     if (token) {
       dispatch(fetchUserWToken(token));
     }
+    dispatch(setCategories(dispatch));
   }, []);
   return (
     <>
       <Header />
       <Switch>
-        <Route path="/shop/:id2">
+        <Route path="/product">
           <ProductDetailCard />
         </Route>
-        <Route path="/shop">
+        <Route path="/shop/:category/:subCategory">
+          <Shop />
+        </Route>
+        <Route path="/shop/:category">
           <Shop />
         </Route>
         <Route path="/about-us">

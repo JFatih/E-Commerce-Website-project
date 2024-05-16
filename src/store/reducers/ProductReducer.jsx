@@ -9,12 +9,12 @@ import {
 } from "../action/ProductReducerAction";
 
 const initialValue = {
-  categories: {},
-  productList: {},
+  categories: null,
+  productList: null,
   total: null,
   limit: 25,
   offset: 0,
-  filter: "",
+  filter: null,
   fetchState: "NOT_FETCHED",
 };
 
@@ -23,7 +23,7 @@ const ProductReducer = (state = initialValue, action) => {
     case Categories:
       return {
         ...state,
-        categories: { ...state.categories, ...action.payload },
+        categories: action.payload,
       };
     case ProductList:
       return {

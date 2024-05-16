@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CustomerRegister from "./CustomerRegister";
 import StoreRegister from "./StoreRegister";
 import axios from "axios";
-import { fetchRoles, setRoles } from "../../store/action/ClientReducerAction";
+import { fetchRoles } from "../../store/action/ClientReducerAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const instance = axios.create({
