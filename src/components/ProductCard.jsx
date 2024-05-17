@@ -14,7 +14,7 @@ export default function ProductCard({ productsList, display }) {
                   src={data.images.map((datas) => {
                     return datas.url;
                   })}
-                  className="sm:w-60 sm:h-[427px]  sm:object-cover"
+                  className="sm:w-[239px] sm:h-[427px]  sm:object-contain"
                 />
                 <div className="text-center p-5 flex flex-col gap-2">
                   <h1 className="sh5 text-textColor">{data.name}</h1>
