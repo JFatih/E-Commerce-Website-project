@@ -46,13 +46,15 @@ export default function Shop() {
       : ReduxProduct.productList
     ).slice((page - 1) * 8, page * 8);
 
-  const useCategoryData = ReduxProduct.categories
-    .sort((a, b) => b.rating - a.rating)
-    .filter(
-      (data) =>
-        data.gender.toLowerCase() ===
-        (category === "men" ? "e" : category === "women" ? "k" : "")
-    );
+  const useCategoryData =
+    ReduxProduct.categories &&
+    ReduxProduct.categories
+      .sort((a, b) => b.rating - a.rating)
+      .filter(
+        (data) =>
+          data.gender.toLowerCase() ===
+          (category === "men" ? "e" : category === "women" ? "k" : "")
+      );
 
   return (
     <main>
@@ -63,34 +65,35 @@ export default function Shop() {
             <PageNavigation />
           </div>
           <div className="flex flex-row flex-wrap justify-center">
-            {useCategoryData
-              .filter((data) => {
-                if (SubCategory) {
-                  return data.title !== SubCategory;
-                }
-                return true;
-              })
-              .slice(0, 5)
-              .map((data) => {
-                return (
-                  <Link
-                    to={`/shop/${category}/${data.title.toLowerCase()}`}
-                    key={data.title}
-                  >
-                    <div className="relative flex justify-center items-center text-center sh5 text-lightTextColor sm:p-2 mobileCardPadding py-3">
-                      <img
-                        src={data.img}
-                        alt={data.title}
-                        className=" w-[332px] h-[300px] md:w-[205px] md:h-[223px] object-cover object-top "
-                      />
-                      <div className="absolute z-50 text-white">
-                        <p className="p-3">{data.title}</p>
-                        <p className="p-3">{data.title} Items</p>
+            {useCategoryData &&
+              useCategoryData
+                .filter((data) => {
+                  if (SubCategory) {
+                    return data.title !== SubCategory;
+                  }
+                  return true;
+                })
+                .slice(0, 5)
+                .map((data) => {
+                  return (
+                    <Link
+                      to={`/shop/${category}/${data.title.toLowerCase()}`}
+                      key={data.title}
+                    >
+                      <div className="relative flex justify-center items-center text-center sh5 text-lightTextColor sm:p-2 mobileCardPadding py-3">
+                        <img
+                          src={data.img}
+                          alt={data.title}
+                          className=" w-[332px] h-[300px] md:w-[205px] md:h-[223px] object-cover object-top "
+                        />
+                        <div className="absolute z-50 text-white">
+                          <p className="p-3">{data.title}</p>
+                          <p className="p-3">{data.title} Items</p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                );
-              })}
+                    </Link>
+                  );
+                })}
           </div>
         </div>
       </section>
