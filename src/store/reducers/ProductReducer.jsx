@@ -14,7 +14,7 @@ const initialValue = {
   total: null,
   limit: 25,
   offset: 0,
-  filter: null,
+  filter: "Popularity",
   fetchState: "NOT_FETCHED",
 };
 
@@ -28,7 +28,7 @@ const ProductReducer = (state = initialValue, action) => {
     case ProductList:
       return {
         ...state,
-        productList: { ...state.productList, ...action.payload },
+        productList: action.payload,
       };
     case Total:
       return { ...state, total: action.payload };

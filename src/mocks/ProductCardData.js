@@ -1,3 +1,10 @@
+export const ProductCartColors = [
+  "primaryColor",
+  "secondaryColor",
+  "alertColor",
+  "darkBackgroundColor",
+];
+
 export const ProductCartData = [
   {
     id: 1,

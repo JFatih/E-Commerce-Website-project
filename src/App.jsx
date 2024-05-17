@@ -17,7 +17,10 @@ import SignIn from "./pages/RegisterLogin/SignIn";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUserWToken } from "./store/action/ClientReducerAction";
-import { setCategories } from "./store/action/ProductReducerAction";
+import {
+  fetchProductList,
+  setCategories,
+} from "./store/action/ProductReducerAction";
 
 function App() {
   const dispatch = useDispatch();

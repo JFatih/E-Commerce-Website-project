@@ -17,8 +17,8 @@ export const setCategories = () => async (dispatch) => {
   }
 };
 
-export const setProductList = (user) => {
-  return { type: ProductList, payload: user };
+export const setProductList = (data) => {
+  return { type: ProductList, payload: data };
 };
 
 export const setTotal = (user) => {
@@ -39,4 +39,17 @@ export const setOffset = (numb) => {
 
 export const setFilter = (data) => {
   return { type: Filter, payload: data };
+};
+
+export const fetchProductList = () => async (dispatch) => {
+  dispatch(setFetchState("FETCHING"));
+  try {
+    const res = await instance.get("/products");
+    dispatch(setProductList(res.data.products));
+    dispatch(setTotal(res.data.total));
+    dispatch(setFetchState("FETCHED"));
+  } catch (err) {
+    dispatch(setFetchState("FAILED"));
+    console.log(err);
+  }
 };

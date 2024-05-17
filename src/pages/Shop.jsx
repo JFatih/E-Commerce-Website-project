@@ -1,19 +1,52 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
-import { useState } from "react";
-import ProductCard2 from "../components/ProductCard2";
+import { useEffect, useState } from "react";
 import PageNavigation from "../components/PageNavigation";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RotatingLines } from "react-loader-spinner";
+import {
+  fetchProductList,
+  setFilter,
+} from "../store/action/ProductReducerAction";
 
 export default function Shop() {
+  const dispatch = useDispatch();
   const [display, setDisplay] = useState("grid");
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   let { category, SubCategory } = useParams();
+  const [selectedFilter, setSelectedFilter] = useState("Popularity");
 
-  const categoryData = useSelector((store) => store.Product.categories);
+  const handleFilterChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
 
-  const useCategoryData = categoryData
+  const handleFilterToRedux = () => {
+    dispatch(setFilter(selectedFilter));
+  };
+
+  useEffect(() => {
+    dispatch(fetchProductList());
+  }, []);
+
+  const ReduxProduct = useSelector((store) => store.Product);
+
+  const pageCount =
+    ReduxProduct.fetchState === "FETCHED" &&
+    Math.ceil(ReduxProduct.productList.length / 8);
+
+  const productsList =
+    ReduxProduct.fetchState === "FETCHED" &&
+    (ReduxProduct.filter === "Popularity"
+      ? [...ReduxProduct.productList].sort((a, b) => b.rating - a.rating)
+      : ReduxProduct.filter === "Ascending"
+      ? [...ReduxProduct.productList].sort((a, b) => a.price - b.price)
+      : ReduxProduct.filter === "Descending"
+      ? [...ReduxProduct.productList].sort((a, b) => b.price - a.price)
+      : ReduxProduct.productList
+    ).slice((page - 1) * 8, page * 8);
+
+  const useCategoryData = ReduxProduct.categories
     .sort((a, b) => b.rating - a.rating)
     .filter(
       (data) =>
@@ -21,9 +54,6 @@ export default function Shop() {
         (category === "men" ? "e" : category === "women" ? "k" : "")
     );
 
-  console.log("Category:", category);
-  console.log("SubCategory:", SubCategory);
-  console.log("useCategoryData:", useCategoryData);
   return (
     <main>
       <section className="bg-lightTextGray ">
@@ -89,32 +119,58 @@ export default function Shop() {
         </div>
         <div className="flex flex-row gap-3 justify-center">
           <div className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7">
-            <select className="bg-[#F9F9F9] ">
-              <option value="fruit">Popularity</option>
-              <option value="vegetable">Ascending</option>
-              <option value="meat">Descending</option>
+            <select
+              className="bg-[#F9F9F9]"
+              value={selectedFilter}
+              onChange={handleFilterChange}
+            >
+              <option value="Popularity">Popularity</option>
+              <option value="Ascending">Ascending</option>
+              <option value="Descending">Descending</option>
             </select>
           </div>
-          <button className="px-7 py-3 bg-primaryColor text-white rounded-md">
+          <button
+            className="px-7 py-3 bg-primaryColor text-white rounded-md"
+            onClick={handleFilterToRedux}
+          >
             Filter
           </button>
         </div>
       </section>
-      {display === "grid" ? <ProductCard /> : <ProductCard2 />}
+      <section className="flex justify-center items-center">
+        {ReduxProduct.fetchState === "FETCHING" && (
+          <RotatingLines
+            visible={true}
+            height="150"
+            width="150"
+            color="black"
+            strokeWidth="5"
+            animationDuration="0.75"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        )}
+        {ReduxProduct.fetchState === "FETCHED" && (
+          <ProductCard productsList={productsList} display={display} />
+        )}
+      </section>
       <section className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">
         <button
           className={`border border-mutedTextColor p-5 rounded-l-lg  shadow-md   ${
-            page === 0
+            page === 1
               ? "bg-[#f3f3f3] text-[#bdbdbd]"
               : "bg-white text-primaryColor hover:bg-primaryColor hover:text-white"
           }`}
-          onClick={() => setPage(0)}
+          onClick={() => setPage(1)}
         >
           First
         </button>
-        {(page === 0 || page === 1
+        {(page === 1
           ? [1, 2, 3]
-          : [page - 1, page, page + 1]
+          : page < pageCount
+          ? [page - 1, page, page + 1]
+          : [page - 2, page - 1, page]
         ).map((data) => {
           return (
             <button
@@ -132,9 +188,13 @@ export default function Shop() {
           );
         })}
         <button
-          className="border border-mutedTextColor p-5 rounded-r-lg text-primaryColor shadow-md hover:text-white hover:bg-primaryColor"
+          className={`border border-mutedTextColor p-5 rounded-r-lg text-primaryColor shadow-md hover:text-white hover:bg-primaryColor  ${
+            page === pageCount
+              ? "bg-primaryColor text-white"
+              : "bg-white text-primaryColor hover:bg-primaryColor hover:text-white"
+          }`}
           onClick={() => {
-            setPage((prev) => prev + 1);
+            page < pageCount && setPage((prev) => prev + 1);
           }}
         >
           Next
