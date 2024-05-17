@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import LoginRegister from "./pages/RegisterLogin/LoginRegister";
 import SignIn from "./pages/RegisterLogin/SignIn";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUserWToken } from "./store/action/ClientReducerAction";
 import {
@@ -23,7 +23,6 @@ import {
 } from "./store/action/ProductReducerAction";
 
 function App() {
-  const [productLoading, setProductLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -31,7 +30,6 @@ function App() {
       dispatch(fetchUserWToken(token));
     }
     dispatch(setCategories(dispatch));
-    dispatch(fetchProductList(setProductLoading));
   }, []);
   return (
     <>
@@ -41,10 +39,10 @@ function App() {
           <ProductDetailCard />
         </Route>
         <Route path="/shop/:category/:SubCategory">
-          <Shop productLoading={productLoading} />
+          <Shop />
         </Route>
         <Route path="/shop/:category">
-          <Shop productLoading={productLoading} />
+          <Shop />
         </Route>
         <Route path="/about-us">
           <AboutUs />

@@ -41,14 +41,15 @@ export const setFilter = (data) => {
   return { type: Filter, payload: data };
 };
 
-export const fetchProductList = (setProductLoading) => async (dispatch) => {
-  setProductLoading(true);
+export const fetchProductList = () => async (dispatch) => {
+  dispatch(setFetchState("FETCHING"));
   try {
     const res = await instance.get("/products");
     dispatch(setProductList(res.data.products));
     dispatch(setTotal(res.data.total));
-    setProductLoading(false);
+    dispatch(setFetchState("FETCHED"));
   } catch (err) {
+    dispatch(setFetchState("FAILED"));
     console.log(err);
   }
 };

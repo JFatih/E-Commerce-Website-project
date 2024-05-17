@@ -51,7 +51,17 @@ export default function Header() {
                   </div>
                 </Link>
               </div>
-            ) : null}
+            ) : (
+              <div className="hidden lg:flex flex-row gap-1 sh6 py-3">
+                <Link to="/signup" className="flex items-center gap-2">
+                  <p>Register</p>
+                </Link>
+                <p className=" sm:block">/</p>
+                <Link to="/signin" className="flex items-center gap-2">
+                  <p>Login</p>
+                </Link>
+              </div>
+            )}
             <button
               className="flex lg:hidden fa-solid fa-bars"
               onClick={toggleMenu}
