@@ -15,7 +15,7 @@ export default function Shop() {
   const [display, setDisplay] = useState("grid");
   const [page, setPage] = useState(1);
   let { category, SubCategory } = useParams();
-  const [selectedFilter, setSelectedFilter] = useState("Popularity");
+  const [selectedFilter, setSelectedFilter] = useState("rating:desc");
 
   const handleFilterChange = (event) => {
     setSelectedFilter(event.target.value);
@@ -37,11 +37,13 @@ export default function Shop() {
 
   const productsList =
     ReduxProduct.fetchState === "FETCHED" &&
-    (ReduxProduct.filter === "Popularity"
+    (ReduxProduct.filter === "rating:desc"
       ? [...ReduxProduct.productList].sort((a, b) => b.rating - a.rating)
-      : ReduxProduct.filter === "Ascending"
+      : ReduxProduct.filter === "rating:asc"
+      ? [...ReduxProduct.productList].sort((a, b) => a.rating - b.rating)
+      : ReduxProduct.filter === "price:asc"
       ? [...ReduxProduct.productList].sort((a, b) => a.price - b.price)
-      : ReduxProduct.filter === "Descending"
+      : ReduxProduct.filter === "price:desc"
       ? [...ReduxProduct.productList].sort((a, b) => b.price - a.price)
       : ReduxProduct.productList
     ).slice((page - 1) * 8, page * 8);
@@ -77,7 +79,9 @@ export default function Shop() {
                 .map((data) => {
                   return (
                     <Link
-                      to={`/shop/${category}/${data.title.toLowerCase()}`}
+                      to={`/shop/${category}/${data.title
+                        .toLowerCase()
+                        .trim()}`}
                       key={data.title}
                     >
                       <div className="relative flex justify-center items-center text-center sh5 text-lightTextColor sm:p-2 mobileCardPadding py-3">
@@ -127,9 +131,10 @@ export default function Shop() {
               value={selectedFilter}
               onChange={handleFilterChange}
             >
-              <option value="Popularity">Popularity</option>
-              <option value="Ascending">Ascending</option>
-              <option value="Descending">Descending</option>
+              <option value="rating:asc">Rating Ascending</option>
+              <option value="rating:desc">Rating Descending</option>
+              <option value="price:asc">Price Ascending</option>
+              <option value="price:desc">Price Descending</option>
             </select>
           </div>
           <button

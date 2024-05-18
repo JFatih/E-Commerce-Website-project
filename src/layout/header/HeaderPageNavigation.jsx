@@ -10,9 +10,9 @@ export const HeaderPageNavigation = () => {
         {headerData.map((data, index) => {
           if (data.name !== "Shop") {
             return (
-              <li key={index}>
-                <Link to={data.link}>{data.name}</Link>
-              </li>
+              <Link to={data.link} key={index}>
+                {data.name}
+              </Link>
             );
           } else if (data.name === "Shop") {
             return (
@@ -37,7 +37,9 @@ export const HeaderPageNavigation = () => {
                             .map((data, index) => {
                               return (
                                 <Link
-                                  to={`/shop/men/${data.title.toLowerCase()} `}
+                                  to={`/shop/men/${data.title
+                                    .toLowerCase()
+                                    .trim()}`}
                                   key={index}
                                 >
                                   {" "}
@@ -66,7 +68,9 @@ export const HeaderPageNavigation = () => {
                             .map((data, index) => {
                               return (
                                 <Link
-                                  to={`/shop/women/${data.title.toLowerCase()} `}
+                                  to={`/shop/women/${data.title
+                                    .toLowerCase()
+                                    .trim()}`}
                                   key={index}
                                 >
                                   {" "}

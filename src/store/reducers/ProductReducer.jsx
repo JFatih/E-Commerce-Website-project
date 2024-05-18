@@ -14,7 +14,7 @@ const initialValue = {
   total: null,
   limit: 25,
   offset: 0,
-  filter: "Popularity",
+  filter: "rating:desc",
   fetchState: "NOT_FETCHED",
 };
 

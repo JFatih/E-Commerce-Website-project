@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import { ProductCartColors } from "../mocks/ProductCardData";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ProductCard({ productsList, display }) {
+  const { category, SubCategory } = useParams();
   return (
     <div className="max-w-[1200px] flex flex-row flex-wrap gap-5 justify-start mx-auto  mobileCardPaddin">
       {productsList &&
         productsList.map((data) => {
           return display === "grid" ? (
             <div className="mx-auto bg-white w-[238px]" key={data.id}>
-              <Link to="/Shop/:id">
+              <Link to={`/shop/${category}/${SubCategory}/${data.id}`}>
                 <img
                   src={data.images.map((datas) => {
                     return datas.url;

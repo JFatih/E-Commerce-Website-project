@@ -35,7 +35,7 @@ function App() {
     <>
       <Header />
       <Switch>
-        <Route path="/product">
+        <Route path="/shop/:category/:SubCategory/:id">
           <ProductDetailCard />
         </Route>
         <Route path="/shop/:category/:SubCategory">
