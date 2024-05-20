@@ -5,6 +5,7 @@ import {
   Limit,
   Offset,
   ProductList,
+  RemoveFilter,
   Total,
 } from "../action/ProductReducerAction";
 
@@ -14,7 +15,7 @@ const initialValue = {
   total: null,
   limit: 25,
   offset: 0,
-  filter: "rating:desc",
+  filter: { inputFilter: null, sortFilter: null },
   fetchState: "NOT_FETCHED",
 };
 
@@ -39,7 +40,22 @@ const ProductReducer = (state = initialValue, action) => {
     case Offset:
       return { ...state, offset: action.payload };
     case Filter:
-      return { ...state, filter: action.payload };
+      console.log(action.payload.inputFilter, action.payload.selectedSort);
+      return {
+        ...state,
+        filter: {
+          inputFilter: action.payload.inputFilter,
+          sortFilter: action.payload.selectedSort,
+        },
+      };
+    case RemoveFilter:
+      return {
+        ...state,
+        filter: {
+          inputFilter: initialValue.filter.inputFilter,
+          sortFilter: initialValue.filter.selectedSort,
+        },
+      };
     default:
       return state;
   }
