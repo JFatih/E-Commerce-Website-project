@@ -35,13 +35,16 @@ function App() {
     <>
       <Header />
       <Switch>
-        <Route path="/shop/:category/:SubCategory/:id">
+        <Route path="/shop/:gender/:categoryName/:categoryId/:id">
           <ProductDetailCard />
         </Route>
-        <Route path="/shop/:category/:SubCategory">
+        <Route path="/shop/:gender/:categoryName/:categoryId">
           <Shop />
         </Route>
-        <Route path="/shop/:category">
+        <Route path="/shop/:gender">
+          <Shop />
+        </Route>
+        <Route path="/shop">
           <Shop />
         </Route>
         <Route path="/about-us">

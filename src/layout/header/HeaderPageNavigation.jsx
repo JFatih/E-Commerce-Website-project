@@ -17,9 +17,11 @@ export const HeaderPageNavigation = () => {
           } else if (data.name === "Shop") {
             return (
               <li key={index} className="group relative dropdown">
-                <div className="flex gap-1 items-center">
-                  Shop<i className="fa-solid fa-angle-down"></i>
-                </div>
+                <Link to="/shop">
+                  <div className="flex gap-1 items-center">
+                    Shop<i className="fa-solid fa-angle-down"></i>
+                  </div>
+                </Link>
                 <div className="group-hover:block dropdown-menu absolute hidden">
                   <div className="flex flex-row ">
                     <div>
@@ -39,7 +41,7 @@ export const HeaderPageNavigation = () => {
                                 <Link
                                   to={`/shop/men/${data.title
                                     .toLowerCase()
-                                    .trim()}`}
+                                    .trim()}/${data.id}`}
                                   key={index}
                                 >
                                   {" "}
@@ -70,7 +72,7 @@ export const HeaderPageNavigation = () => {
                                 <Link
                                   to={`/shop/women/${data.title
                                     .toLowerCase()
-                                    .trim()}`}
+                                    .trim()}/${data.id}`}
                                   key={index}
                                 >
                                   {" "}

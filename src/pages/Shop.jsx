@@ -8,45 +8,61 @@ import { RotatingLines } from "react-loader-spinner";
 import {
   fetchProductList,
   setFilter,
+  setRemoveFilter,
 } from "../store/action/ProductReducerAction";
 
 export default function Shop() {
   const dispatch = useDispatch();
   const [display, setDisplay] = useState("grid");
   const [page, setPage] = useState(1);
-  let { category, SubCategory } = useParams();
-  const [selectedFilter, setSelectedFilter] = useState("rating:desc");
+  let { gender, categoryName, categoryId } = useParams();
+  const [selectedSort, setSelectedSort] = useState(null);
+  const [inputFilter, setInputFilter] = useState(null);
 
-  const handleFilterChange = (event) => {
-    setSelectedFilter(event.target.value);
+  const handleSortChange = (event) => {
+    setSelectedSort(event.target.value);
   };
 
-  const handleFilterToRedux = () => {
-    dispatch(setFilter(selectedFilter));
+  const handleFilterChange = (event) => {
+    setInputFilter(event.target.value);
+  };
+
+  const handleFilterRemove = () => {
+    setSelectedSort(null);
+    setInputFilter(null);
+    dispatch(setRemoveFilter());
+  };
+
+  const handleSortToRedux = () => {
+    dispatch(setFilter(inputFilter, selectedSort));
   };
 
   useEffect(() => {
-    dispatch(fetchProductList());
+    dispatch(fetchProductList("/products"));
   }, []);
 
   const ReduxProduct = useSelector((store) => store.Product);
 
+  useEffect(() => {
+    console.log(ReduxProduct.sort);
+    let url = "/products?category=" + categoryId;
+    if (ReduxProduct.filter.inputFilter) {
+      url += "&filter=" + ReduxProduct.filter.inputFilter;
+    }
+    if (ReduxProduct.filter.sortFilter) {
+      url += "&sort=" + ReduxProduct.filter.sortFilter;
+    }
+    console.log(url);
+    dispatch(fetchProductList(url));
+  }, [
+    categoryId,
+    ReduxProduct.filter.inputFilter,
+    ReduxProduct.filter.sortFilter,
+  ]);
+
   const pageCount =
     ReduxProduct.fetchState === "FETCHED" &&
     Math.ceil(ReduxProduct.productList.length / 8);
-
-  const productsList =
-    ReduxProduct.fetchState === "FETCHED" &&
-    (ReduxProduct.filter === "rating:desc"
-      ? [...ReduxProduct.productList].sort((a, b) => b.rating - a.rating)
-      : ReduxProduct.filter === "rating:asc"
-      ? [...ReduxProduct.productList].sort((a, b) => a.rating - b.rating)
-      : ReduxProduct.filter === "price:asc"
-      ? [...ReduxProduct.productList].sort((a, b) => a.price - b.price)
-      : ReduxProduct.filter === "price:desc"
-      ? [...ReduxProduct.productList].sort((a, b) => b.price - a.price)
-      : ReduxProduct.productList
-    ).slice((page - 1) * 8, page * 8);
 
   const useCategoryData =
     ReduxProduct.categories &&
@@ -55,7 +71,7 @@ export default function Shop() {
       .filter(
         (data) =>
           data.gender.toLowerCase() ===
-          (category === "men" ? "e" : category === "women" ? "k" : "")
+          (gender === "men" ? "e" : gender === "women" ? "k" : "")
       );
 
   return (
@@ -70,8 +86,8 @@ export default function Shop() {
             {useCategoryData &&
               useCategoryData
                 .filter((data) => {
-                  if (SubCategory) {
-                    return data.title !== SubCategory;
+                  if (categoryName) {
+                    return data.title !== categoryName;
                   }
                   return true;
                 })
@@ -79,9 +95,9 @@ export default function Shop() {
                 .map((data) => {
                   return (
                     <Link
-                      to={`/shop/${category}/${data.title
-                        .toLowerCase()
-                        .trim()}`}
+                      to={`/shop/${gender}/${data.title.toLowerCase().trim()}/${
+                        data.id
+                      }`}
                       key={data.title}
                     >
                       <div className="relative flex justify-center items-center text-center sh5 text-lightTextColor sm:p-2 mobileCardPadding py-3">
@@ -102,7 +118,7 @@ export default function Shop() {
         </div>
       </section>
       <section className=" max-w-[1200px] mx-auto text-secondTextColor sh6 text-center flex flex-col gap-6 py-6 items-center sm:flex-row sm:justify-between">
-        <p>Showing all 12 results</p>
+        <p>Showing all {ReduxProduct.total} results</p>
         <div className="flex flex-row gap-2 justify-center items-center">
           <p>Views:</p>
           <button onClick={() => setDisplay("grid")}>
@@ -124,25 +140,41 @@ export default function Shop() {
             ></i>
           </button>
         </div>
-        <div className="flex flex-row gap-3 justify-center">
-          <div className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7">
-            <select
-              className="bg-[#F9F9F9]"
-              value={selectedFilter}
+        <div className="flex flex-row gap-3 justify-center items-center">
+          <div className="flex flex-col gap-3 justify-center sm:flex-row">
+            <input
+              className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7 "
+              placeholder="Color Filter like black"
               onChange={handleFilterChange}
-            >
-              <option value="rating:asc">Rating Ascending</option>
-              <option value="rating:desc">Rating Descending</option>
-              <option value="price:asc">Price Ascending</option>
-              <option value="price:desc">Price Descending</option>
-            </select>
+              value={inputFilter}
+            ></input>
+            <div className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7">
+              <select
+                className="bg-[#F9F9F9]"
+                value={selectedSort}
+                onChange={handleSortChange}
+              >
+                <option value="rating:asc">Rating Ascending</option>
+                <option value="rating:desc">Rating Descending</option>
+                <option value="price:asc">Price Ascending</option>
+                <option value="price:desc">Price Descending</option>
+              </select>
+            </div>
           </div>
-          <button
-            className="px-7 py-3 bg-primaryColor text-white rounded-md"
-            onClick={handleFilterToRedux}
-          >
-            Filter
-          </button>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              className="px-7 py-3 bg-primaryColor text-white rounded-md"
+              onClick={handleSortToRedux}
+            >
+              Filter
+            </button>
+            <button
+              className="px-7 py-3 bg-dangerTextColor text-white rounded-md"
+              onClick={handleFilterRemove}
+            >
+              Reset
+            </button>
+          </div>
         </div>
       </section>
       <section className="flex justify-center items-center">
@@ -160,7 +192,10 @@ export default function Shop() {
           />
         )}
         {ReduxProduct.fetchState === "FETCHED" && (
-          <ProductCard productsList={productsList} display={display} />
+          <ProductCard
+            productsList={ReduxProduct.productList}
+            display={display}
+          />
         )}
       </section>
       <section className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">

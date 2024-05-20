@@ -7,6 +7,8 @@ export const FetchState = "Fetch State";
 export const Limit = "Product Count on the Page";
 export const Offset = "Offset for Pagination";
 export const Filter = "Filter Products";
+export const Sort = "Sort Products";
+export const RemoveFilter = "Remove all Filter";
 
 export const setCategories = () => async (dispatch) => {
   try {
@@ -37,14 +39,22 @@ export const setOffset = (numb) => {
   return { type: Offset, payload: numb };
 };
 
-export const setFilter = (data) => {
-  return { type: Filter, payload: data };
+export const setFilter = (inputFilter, selectedSort) => {
+  console.log(inputFilter, selectedSort);
+  return {
+    type: Filter,
+    payload: { inputFilter: inputFilter, selectedSort: selectedSort },
+  };
 };
 
-export const fetchProductList = () => async (dispatch) => {
+export const setRemoveFilter = () => {
+  return { type: RemoveFilter };
+};
+
+export const fetchProductList = (url) => async (dispatch) => {
   dispatch(setFetchState("FETCHING"));
   try {
-    const res = await instance.get("/products");
+    const res = await instance.get(url);
     dispatch(setProductList(res.data.products));
     dispatch(setTotal(res.data.total));
     dispatch(setFetchState("FETCHED"));
