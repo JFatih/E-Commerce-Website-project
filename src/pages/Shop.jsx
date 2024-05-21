@@ -117,65 +117,77 @@ export default function Shop() {
           </div>
         </div>
       </section>
-      <section className=" max-w-[1200px] mx-auto text-secondTextColor sh6 text-center flex flex-col gap-6 py-6 items-center sm:flex-row sm:justify-between">
-        <p>Showing all {ReduxProduct.total} results</p>
-        <div className="flex flex-row gap-2 justify-center items-center">
-          <p>Views:</p>
-          <button onClick={() => setDisplay("grid")}>
-            <i
-              className={`text-xl border px-2 py-1  rounded-md border-lightGray2 fa-solid fa-border-all ${
-                display === "grid"
-                  ? "bg-textColor text-white"
-                  : "bg-white text-textColor"
-              }`}
-            ></i>
-          </button>
-          <button onClick={() => setDisplay("list")}>
-            <i
-              className={`text-xl border px-2 py-1 border-lightGray2 rounded-md text-textColor fa-solid fa-list ${
-                display === "list"
-                  ? "bg-textColor text-white"
-                  : "bg-white text-textColor"
-              }`}
-            ></i>
-          </button>
-        </div>
-        <div className="flex flex-row gap-3 justify-center items-center">
-          <div className="flex flex-col gap-3 justify-center sm:flex-row">
-            <input
-              className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7 "
-              placeholder="Color Filter like black"
-              onChange={handleFilterChange}
-              value={inputFilter}
-            ></input>
-            <div className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7">
-              <select
-                className="bg-[#F9F9F9]"
-                value={selectedSort}
-                onChange={handleSortChange}
+      <section className=" max-w-[1200px] mx-auto text-secondTextColor sh6 text-center">
+        <div className="flex flex-col gap-6 py-6 items-center sm:flex-row sm:justify-between mx-auto">
+          <p>Showing all {ReduxProduct.total} results</p>
+          <div className="flex flex-row gap-2 justify-center items-center">
+            <p>Views:</p>
+            <button onClick={() => setDisplay("grid")}>
+              <i
+                className={`text-xl border px-2 py-1  rounded-md border-lightGray2 fa-solid fa-border-all ${
+                  display === "grid"
+                    ? "bg-textColor text-white"
+                    : "bg-white text-textColor"
+                }`}
+              ></i>
+            </button>
+            <button onClick={() => setDisplay("list")}>
+              <i
+                className={`text-xl border px-2 py-1 border-lightGray2 rounded-md text-textColor fa-solid fa-list ${
+                  display === "list"
+                    ? "bg-textColor text-white"
+                    : "bg-white text-textColor"
+                }`}
+              ></i>
+            </button>
+          </div>
+          <div className="flex flex-row gap-3 justify-center items-center">
+            <div className="flex flex-col gap-3 justify-center sm:flex-row">
+              <input
+                className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7 "
+                placeholder="Color Filter like black"
+                onChange={handleFilterChange}
+                value={inputFilter}
+              ></input>
+              <div className="border border-[#DDDDDD] rounded-md bg-[#F9F9F9] p-2 text-sm font-normal leading-7">
+                <select
+                  className="bg-[#F9F9F9]"
+                  value={selectedSort}
+                  onChange={handleSortChange}
+                >
+                  <option value="rating:asc">Rating Ascending</option>
+                  <option value="rating:desc">Rating Descending</option>
+                  <option value="price:asc">Price Ascending</option>
+                  <option value="price:desc">Price Descending</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <button
+                className="px-7 py-3 bg-primaryColor text-white rounded-md"
+                onClick={handleSortToRedux}
               >
-                <option value="rating:asc">Rating Ascending</option>
-                <option value="rating:desc">Rating Descending</option>
-                <option value="price:asc">Price Ascending</option>
-                <option value="price:desc">Price Descending</option>
-              </select>
+                Filter
+              </button>
+              <button
+                className="px-7 py-3 bg-dangerTextColor text-white rounded-md"
+                onClick={handleFilterRemove}
+              >
+                Reset
+              </button>
             </div>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <button
-              className="px-7 py-3 bg-primaryColor text-white rounded-md"
-              onClick={handleSortToRedux}
-            >
-              Filter
-            </button>
-            <button
-              className="px-7 py-3 bg-dangerTextColor text-white rounded-md"
-              onClick={handleFilterRemove}
-            >
-              Reset
-            </button>
-          </div>
         </div>
+        {/* <div className="flex flex-row flex-wrap items-center gap-8">
+          {ReduxProduct.filter.inputFilter && (
+            <button>
+              {ReduxProduct.filter.inputFilter + " color filtered"}
+            </button>
+          )}
+          {ReduxProduct.filter.inputFilter && (
+            <button>{ReduxProduct.filter.sortFilter + " filtered"}</button>
+          )}
+        </div> */}
       </section>
       <section className="flex justify-center items-center">
         {ReduxProduct.fetchState === "FETCHING" && (
