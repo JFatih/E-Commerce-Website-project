@@ -8,13 +8,14 @@ import { RotatingLines } from "react-loader-spinner";
 import {
   fetchProductList,
   setFilter,
+  setOffset,
   setRemoveFilter,
 } from "../store/action/ProductReducerAction";
+import ReactPaginate from "react-paginate";
 
 export default function Shop() {
   const dispatch = useDispatch();
   const [display, setDisplay] = useState("grid");
-  const [page, setPage] = useState(1);
   let { gender, categoryName, categoryId } = useParams();
   const [selectedSort, setSelectedSort] = useState(null);
   const [inputFilter, setInputFilter] = useState(null);
@@ -60,10 +61,6 @@ export default function Shop() {
     ReduxProduct.filter.sortFilter,
   ]);
 
-  const pageCount =
-    ReduxProduct.fetchState === "FETCHED" &&
-    Math.ceil(ReduxProduct.productList.length / 8);
-
   const useCategoryData =
     ReduxProduct.categories &&
     ReduxProduct.categories
@@ -73,6 +70,23 @@ export default function Shop() {
           data.gender.toLowerCase() ===
           (gender === "men" ? "e" : gender === "women" ? "k" : "")
       );
+
+  const endOffset = ReduxProduct.offset + ReduxProduct.limit;
+  console.log(`Loading items from ${ReduxProduct.offset} to ${endOffset}`);
+  const currentItems =
+    ReduxProduct.productList &&
+    ReduxProduct.productList.slice(ReduxProduct.offset, endOffset);
+  const pageCount =
+    ReduxProduct.productList &&
+    Math.ceil(ReduxProduct.productList.length / ReduxProduct.limit);
+  const handlePageClick = (event) => {
+    const newOffset =
+      (event.selected * ReduxProduct.limit) % ReduxProduct.productList.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    dispatch(setOffset(newOffset));
+  };
 
   return (
     <main>
@@ -204,56 +218,28 @@ export default function Shop() {
           />
         )}
         {ReduxProduct.fetchState === "FETCHED" && (
-          <ProductCard
-            productsList={ReduxProduct.productList}
-            display={display}
-          />
+          <ProductCard productsList={currentItems} display={display} />
         )}
       </section>
-      <section className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 sbtn-text">
-        <button
-          className={`border border-mutedTextColor p-5 rounded-l-lg  shadow-md   ${
-            page === 1
-              ? "bg-[#f3f3f3] text-[#bdbdbd]"
-              : "bg-white text-primaryColor hover:bg-primaryColor hover:text-white"
-          }`}
-          onClick={() => setPage(1)}
-        >
-          First
-        </button>
-        {(page === 1
-          ? [1, 2, 3]
-          : page < pageCount
-          ? [page - 1, page, page + 1]
-          : [page - 2, page - 1, page]
-        ).map((data) => {
-          return (
-            <button
-              className={`border border-mutedTextColor py-5 w-11 text-primaryColor shadow-md hover:text-white hover:bg-primaryColor ${
-                page === data
-                  ? "bg-primaryColor text-white"
-                  : "bg-white text-primaryColor hover:bg-primaryColor hover:text-white"
-              }`}
-              key={data}
-              value={data}
-              onClick={() => setPage(data)}
-            >
-              {data}
-            </button>
-          );
-        })}
-        <button
-          className={`border border-mutedTextColor p-5 rounded-r-lg text-primaryColor shadow-md hover:text-white hover:bg-primaryColor  ${
-            page === pageCount
-              ? "bg-primaryColor text-white"
-              : "bg-white text-primaryColor hover:bg-primaryColor hover:text-white"
-          }`}
-          onClick={() => {
-            page < pageCount && setPage((prev) => prev + 1);
-          }}
-        >
-          Next
-        </button>
+      <section className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 px-10 sbtn-text">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          nextClassName="text-primaryColor"
+          nextLinkClassName="border border-mutedTextColor sm:px-4 px-3 sm:py-5 py-4 rounded-r-lg"
+          previousClassName="text-primaryColor"
+          previousLinkClassName="border border-mutedTextColor sm:px-4 px-3 sm:py-5 py-4 rounded-l-lg "
+          pageClassName="text-primaryColor"
+          pageLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  s:w-[52px] w-[32px] sm:h-[58.4px] h-[50.4px]"
+          activeClassName="bg-primaryColor text-white"
+          disabledLinkClassName="bg-[#F3F3F3] text-mutedTextColor"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+          className="flex flex-row justify-center items-center text-center shadow-md"
+        />
       </section>
     </main>
   );
