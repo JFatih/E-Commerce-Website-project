@@ -13,7 +13,7 @@ const initialValue = {
   categories: null,
   productList: null,
   total: null,
-  limit: 25,
+  limit: 8,
   offset: 0,
   filter: { inputFilter: null, sortFilter: null },
   fetchState: "NOT_FETCHED",
