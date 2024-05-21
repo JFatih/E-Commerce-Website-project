@@ -221,7 +221,7 @@ export default function Shop() {
           <ProductCard productsList={currentItems} display={display} />
         )}
       </section>
-      <section className="max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 px-10 sbtn-text">
+      <section className=" max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 px-10 sbtn-text">
         <ReactPaginate
           breakLabel="..."
           nextLabel="next >"
@@ -230,7 +230,7 @@ export default function Shop() {
           previousClassName="text-primaryColor"
           previousLinkClassName="border border-mutedTextColor sm:px-4 px-3 sm:py-5 py-4 rounded-l-lg "
           pageClassName="text-primaryColor"
-          pageLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  s:w-[52px] w-[32px] sm:h-[58.4px] h-[50.4px]"
+          pageLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  sm:px-4 px-3  sm:h-[58.4px] h-[52px]"
           activeClassName="bg-primaryColor text-white"
           disabledLinkClassName="bg-[#F3F3F3] text-mutedTextColor"
           onPageChange={handlePageClick}
