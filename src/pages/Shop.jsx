@@ -39,26 +39,40 @@ export default function Shop() {
   };
 
   useEffect(() => {
-    dispatch(fetchProductList("/products"));
+    dispatch(
+      fetchProductList(
+        "/products?category=" +
+          categoryId +
+          "&limit=" +
+          ReduxProduct.limit +
+          "&offset=" +
+          ReduxProduct.offset
+      )
+    );
   }, []);
 
   const ReduxProduct = useSelector((store) => store.Product);
 
   useEffect(() => {
-    console.log(ReduxProduct.sort);
-    let url = "/products?category=" + categoryId;
+    let url =
+      "/products?category=" +
+      categoryId +
+      "&limit=" +
+      ReduxProduct.limit +
+      "&offset=" +
+      ReduxProduct.offset;
     if (ReduxProduct.filter.inputFilter) {
       url += "&filter=" + ReduxProduct.filter.inputFilter;
     }
     if (ReduxProduct.filter.sortFilter) {
       url += "&sort=" + ReduxProduct.filter.sortFilter;
     }
-    console.log(url);
     dispatch(fetchProductList(url));
   }, [
     categoryId,
     ReduxProduct.filter.inputFilter,
     ReduxProduct.filter.sortFilter,
+    ReduxProduct.offset,
   ]);
 
   const useCategoryData =
@@ -73,15 +87,12 @@ export default function Shop() {
 
   const endOffset = ReduxProduct.offset + ReduxProduct.limit;
   console.log(`Loading items from ${ReduxProduct.offset} to ${endOffset}`);
-  const currentItems =
-    ReduxProduct.productList &&
-    ReduxProduct.productList.slice(ReduxProduct.offset, endOffset);
   const pageCount =
     ReduxProduct.productList &&
-    Math.ceil(ReduxProduct.productList.length / ReduxProduct.limit);
+    Math.ceil(ReduxProduct.total / ReduxProduct.limit);
   const handlePageClick = (event) => {
     const newOffset =
-      (event.selected * ReduxProduct.limit) % ReduxProduct.productList.length;
+      (event.selected * ReduxProduct.limit) % ReduxProduct.total;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -218,7 +229,10 @@ export default function Shop() {
           />
         )}
         {ReduxProduct.fetchState === "FETCHED" && (
-          <ProductCard productsList={currentItems} display={display} />
+          <ProductCard
+            productsList={ReduxProduct.productList}
+            display={display}
+          />
         )}
       </section>
       <section className=" max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 px-10 sbtn-text">
@@ -231,10 +245,12 @@ export default function Shop() {
           previousLinkClassName="border border-mutedTextColor sm:px-4 px-3 sm:py-5 py-4 rounded-l-lg "
           pageClassName="text-primaryColor"
           pageLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  sm:px-4 px-3  sm:h-[58.4px] h-[52px]"
+          breakClassName="text-primaryColor"
+          breakLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  sm:px-4 px-3  sm:h-[58.4px] h-[52px]"
           activeClassName="bg-primaryColor text-white"
           disabledLinkClassName="bg-[#F3F3F3] text-mutedTextColor"
           onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
+          pageRangeDisplayed={1}
           pageCount={pageCount}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
