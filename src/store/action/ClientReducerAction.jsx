@@ -8,7 +8,7 @@ export const ClientLanguage = "Client Language";
 
 export const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com/",
-  timeout: 3000,
+  timeout: 5000,
 });
 
 export const setUser = (data) => {

@@ -235,26 +235,27 @@ export default function Shop() {
           />
         )}
       </section>
-      <section className=" max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 px-10 sbtn-text">
+      <section className=" max-w-[1200px] mx-auto flex flex-row justify-center items-center py-8 px-5 sbtn-text">
         <ReactPaginate
           breakLabel="..."
           nextLabel="next >"
           nextClassName="text-primaryColor"
-          nextLinkClassName="border border-mutedTextColor sm:px-4 px-3 sm:py-5 py-4 rounded-r-lg"
+          nextLinkClassName="border border-mutedTextColor sm:px-4 px-2 sm:py-5 py-3 rounded-r-lg"
           previousClassName="text-primaryColor"
-          previousLinkClassName="border border-mutedTextColor sm:px-4 px-3 sm:py-5 py-4 rounded-l-lg "
+          previousLinkClassName="border border-mutedTextColor sm:px-4 px-2 sm:py-5 py-3 rounded-l-lg "
           pageClassName="text-primaryColor"
-          pageLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  sm:px-4 px-3  sm:h-[58.4px] h-[52px]"
+          pageLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  sm:px-4 px-3  sm:h-[58.4px] h-[42.4px]"
           breakClassName="text-primaryColor"
-          breakLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  sm:px-4 px-3  sm:h-[58.4px] h-[52px]"
+          breakLinkClassName="flex items-center justify-center w-full h-full border border-mutedTextColor  sm:px-4 px-3  sm:h-[58.4px] h-[42.4px]"
           activeClassName="bg-primaryColor text-white"
           disabledLinkClassName="bg-[#F3F3F3] text-mutedTextColor"
           onPageChange={handlePageClick}
+          marginPagesDisplayed={1}
           pageRangeDisplayed={1}
           pageCount={pageCount}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
-          className="flex flex-row justify-center items-center text-center shadow-md"
+          className="flex flex-row justify-center items-center text-center shadow-md "
         />
       </section>
     </main>

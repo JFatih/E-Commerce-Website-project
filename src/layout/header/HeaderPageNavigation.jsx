@@ -17,12 +17,10 @@ export const HeaderPageNavigation = () => {
           } else if (data.name === "Shop") {
             return (
               <li key={index} className="group relative dropdown">
-                <Link to="/shop">
-                  <div className="flex gap-1 items-center">
-                    Shop<i className="fa-solid fa-angle-down"></i>
-                  </div>
-                </Link>
-                <div className="group-hover:block dropdown-menu absolute hidden">
+                <div className="flex gap-1 items-center">
+                  Shop<i className="fa-solid fa-angle-down"></i>
+                </div>
+                <div className="group-hover:block dropdown-menu absolute hidden z-50">
                   <div className="flex flex-row ">
                     <div>
                       <ul className="top-0 w-auto bg-white  px-3 py-3 flex flex-col gap-3 sh6 ">
