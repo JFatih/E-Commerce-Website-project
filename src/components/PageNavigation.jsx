@@ -24,7 +24,7 @@ export default function PageNavigation() {
   };
 
   return (
-    <div className="flex flex-row gap-2 slink items-center max-w-[1200px] ">
+    <div className="flex flex-row gap-2 slink items-center max-w-[1200px] flex-wrap">
       <Link to="/">
         <span className="hover:font-extrabold -bold">Home</span>
       </Link>

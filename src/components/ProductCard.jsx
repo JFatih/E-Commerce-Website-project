@@ -4,19 +4,26 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ProductCard({ productsList, display }) {
-  const { category, SubCategory } = useParams();
+  const { gender, categoryName, categoryId } = useParams();
   return (
     <div className="max-w-[1200px] flex flex-row flex-wrap gap-5 justify-start mx-auto  mobileCardPaddin">
       {productsList &&
         productsList.map((data) => {
           return display === "grid" ? (
-            <div className="mx-auto bg-white w-[238px]" key={data.id}>
-              <Link to={`/shop/${category}/${SubCategory}/${data.id}`}>
+            <div
+              className="mx-auto bg-white w-[238px] cursor-pointer hover:shadow-xl rounded-md"
+              key={data.id}
+            >
+              <Link
+                to={`/shop/${gender}/${categoryName}/${categoryId}/${data.name
+                  .trim()
+                  .replaceAll(" ", "-")}/${data.id}`}
+              >
                 <img
                   src={data.images.map((datas) => {
                     return datas.url;
                   })}
-                  className="sm:w-[239px] sm:h-[427px]  sm:object-contain"
+                  className="sm:w-[239px] sm:h-[320px]  sm:object-cover"
                 />
                 <div className="text-center p-5 flex flex-col gap-2">
                   <h1 className="sh5 text-textColor">{data.name}</h1>
