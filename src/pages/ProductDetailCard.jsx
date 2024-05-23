@@ -5,23 +5,39 @@ import AdditionalInfo from "../components/ProductPageComponents/AdditionalInfo";
 import Reviews from "../components/ProductPageComponents/Reviews";
 import ProductCard from "../components/ProductCard";
 import PageNavigation from "../components/PageNavigation";
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 export default function ProductDetailCard() {
   const [detail, setDetail] = useState("description");
   const [count, setCount] = useState(1);
+  const { productId } = useParams();
+  const history = useHistory();
+  console.log(productId);
 
+  const productObject = useSelector((store) => store.Product.productList).find(
+    (datas) => datas.id == productId
+  );
+
+  console.log(productObject);
   return (
     <main className="w-screen ">
       <section className=" bg-lightTextGray ">
-        <div className="py-5 mx-auto max-w-[1200px] px-8 sm:px-0">
+        <div className="py-5 mx-auto max-w-[1200px] px-8 sm:px-0 flex justify-start gap-5">
+          <button onClick={() => history.goBack()}>
+            <i className="sh5 fa-solid fa-arrow-left"></i>
+          </button>
           <PageNavigation />
         </div>
         <div className="max-w-[1200px] mobileCardPadding mx-auto pb-8 flex flex-col justify-center sm:flex-row sm:justify-start sm:gap-5 2xl:px-0 ">
           <div>
-            <ProductDetailSlider />
+            <ProductDetailSlider images={productObject.images} />
           </div>
           <div className="p-3 flex flex-col gap-5 sm:px-10 sm:py-10 sm:w-[550px]">
-            <p className="sh4 text-textColor">Floating Phone</p>
+            <p className="sh4 text-textColor">{productObject.name}</p>
             <div className="text-[#F3CD03] flex flex-row gap-3 ">
               <span>
                 <i className="fa-solid fa-star"></i>
@@ -32,15 +48,17 @@ export default function ProductDetailCard() {
               </span>
               <p className="sh6 text-secondTextColor">10 Reviews</p>
             </div>
-            <p className="sh3 text-textColor">$1,139.33</p>
+            <p className="sh3 text-textColor">${productObject.price}</p>
             <div className="sh6 text-secondTextColor flex flex-row gap-3">
               <p>Availability : </p>
-              <p className="text-primaryColor">In Stock</p>
+              <p className="text-primaryColor">
+                {productObject.stock > 0
+                  ? `In Stock ${productObject.stock}`
+                  : "Out of Stock"}
+              </p>
             </div>
             <p className="sparagraph text-[#858585] ">
-              Met minim Mollie non desert Alamo est sit cliquey dolor do met
-              sent. RELIT official consequent door ENIM RELIT Mollie. Excitation
-              venial consequent sent nostrum met.
+              {productObject.description}
             </p>
             <span className="border border-mutedTextColor"></span>
             <div className="flex flex-row gap-4 sh4 items-center my-2">

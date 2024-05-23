@@ -8,7 +8,8 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { useState } from "react";
 
-export default function ProductDetailSlider() {
+export default function ProductDetailSlider({ images }) {
+  console.log(images);
   const [thumbsSwiper, setThumbsSwiper] = useState(undefined);
   return (
     <>
@@ -24,36 +25,16 @@ export default function ProductDetailSlider() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="w-[320px] h-[420px] lg:w-[506px] lg:h-[450px]  flex flex-col"
       >
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-1.jpg"
-            className="object-cover w-full h-full"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-2.jpg"
-            className="object-cover w-full h-full"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-3.jpg"
-            className="object-cover w-full h-full"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-4.jpg"
-            className="object-cover w-full h-full"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img
-            src="https://swiperjs.com/demos/images/nature-5.jpg"
-            className="object-cover w-full h-full"
-          />
-        </SwiperSlide>
+        {images.map((data) => {
+          return (
+            <SwiperSlide key={data.index}>
+              <img
+                src={data.url}
+                className="object-cover w-full h-full object-top"
+              />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
@@ -65,21 +46,13 @@ export default function ProductDetailSlider() {
         modules={[FreeMode, Navigation, Thumbs]}
         className="h-[100px] w-[320px] lg:w-[506px] box-border py-[10px]"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
+        {images.map((data) => {
+          return (
+            <SwiperSlide key={data.index}>
+              <img src={data.url} className="object-cover w-full h-full" />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </>
   );
