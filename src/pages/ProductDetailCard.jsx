@@ -9,18 +9,27 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setAddCart } from "../store/action/ShoppingCartAction";
 
 export default function ProductDetailCard() {
   const [detail, setDetail] = useState("description");
   const [count, setCount] = useState(1);
   const { productId } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
   console.log(productId);
 
   const productObject = useSelector((store) => store.Product.productList).find(
     (datas) => datas.id == productId
   );
+
+  const cartData = useSelector((store) => store.ShoppingCart.cart);
+
+  const handleAddtoCart = () => {
+    let newData = { count: count, checked: true, product: productObject };
+    dispatch;
+  };
 
   console.log(productObject);
   return (
@@ -91,7 +100,10 @@ export default function ProductDetailCard() {
               </span>
             </div>
             <div className="flex flex-row gap-3 my-2">
-              <button className="px-[18px] py-[10px] bg-primaryColor rounded-lg text-white sh4">
+              <button
+                onClick={handleAddtoCart}
+                className="px-[18px] py-[10px] bg-primaryColor rounded-lg text-white sh4"
+              >
                 Add to Cart
               </button>
               <span className="flex flex-row gap-2 text-textColor">

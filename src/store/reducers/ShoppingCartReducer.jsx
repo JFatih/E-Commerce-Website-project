@@ -12,7 +12,21 @@ const initialValue = { cart: [], payment: {}, address: {} };
 const ShoppingCartReducer = (state = initialValue, action) => {
   switch (action.type) {
     case AddCart:
-      return { ...state, cart: [...state.cart, action.payload] };
+      if (
+        state.cart.find((data) => data.product.id == action.payload.product.id)
+      ) {
+        return {
+          ...state,
+          cart: [
+            ...state.card.filter(
+              (datas) => datas.id !== action.payload.product.id
+            ),
+            action.payload,
+          ],
+        };
+      } else {
+        return { ...state, cart: [...state.cart, action.payload] };
+      }
     case RemoveCart:
       return {
         ...state,

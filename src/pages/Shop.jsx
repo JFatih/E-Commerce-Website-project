@@ -68,12 +68,7 @@ export default function Shop() {
       url += "&sort=" + ReduxProduct.filter.sortFilter;
     }
     dispatch(fetchProductList(url));
-  }, [
-    categoryId,
-    ReduxProduct.filter.inputFilter,
-    ReduxProduct.filter.sortFilter,
-    ReduxProduct.offset,
-  ]);
+  }, [categoryId, ReduxProduct.filter, ReduxProduct.offset]);
 
   const useCategoryData =
     ReduxProduct.categories &&
