@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import CryptoJS from "crypto-js";
 import { HeaderTestimotional } from "./HeaderTestimotional";
 import { HeaderPageNavigation } from "./HeaderPageNavigation";
+import CartIcon from "./CartIcon";
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
@@ -15,7 +16,6 @@ export default function Header() {
     if (userEmail.email) {
       const hashedEmail = CryptoJS.SHA256(userEmail);
       const gravatarUrl = `https://www.gravatar.com/avatar/${hashedEmail}`;
-      console.log(hashedEmail);
       document.getElementById("gravatar-image").src = gravatarUrl;
     }
   }, [userEmail]);
@@ -35,9 +35,7 @@ export default function Header() {
           </div>
           <div className="flex gap-3 items-center text-[1.2rem] smobile-menu">
             <i className="fa-solid fa-magnifying-glass"></i>
-            <Link to="/cart">
-              <i className="fa-solid fa-cart-shopping"></i>
-            </Link>
+            <CartIcon />
             {userEmail.email ? (
               <div className="flex flex-row gap-1">
                 <Link to="/" className="flex items-center gap-2">
