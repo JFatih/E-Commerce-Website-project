@@ -7,14 +7,14 @@ export default function CartIcon() {
   return (
     <div className="relative group">
       <i className="fa-solid fa-cart-shopping"></i>
-      <div className="absolute hidden group-hover:block rounded-md border border-mutedTextColor z-10 p-2 sparagraph right-0 bg-white">
+      <div className="absolute hidden group-hover:block rounded-md border border-mutedTextColor z-10 p-2 sparagraph right-0 bg-white min-w-36">
         <div className="flex flex-col gap-2">
           <p className="text-start">Sepetim: {cartData.length} ürün</p>
           {cartData.map((data, index) => {
             return (
               <div
                 key={index}
-                className="flex flex-row gap-3 justify-start items-center border border-mutedTextColor w-60"
+                className="flex flex-row gap-3 justify-start items-center border border-mutedTextColor w-72 "
               >
                 <img
                   src={data.product.images[0].url}
