@@ -28,3 +28,7 @@ export const setAddAddress = (data) => {
 export const setRemoveAddress = (data) => {
   return { type: RemoveAddress, payload: data };
 };
+
+export const addToCart() => {
+  
+}
