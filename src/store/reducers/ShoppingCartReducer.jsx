@@ -11,22 +11,23 @@ const initialValue = { cart: [], payment: {}, address: {} };
 
 const ShoppingCartReducer = (state = initialValue, action) => {
   switch (action.type) {
-    case AddCart:
-      if (
-        state.cart.find((data) => data.product.id == action.payload.product.id)
-      ) {
+    case AddCart: {
+      let isHave = state.cart.find(
+        (data) => data.product.id === action.payload.product.id
+      );
+      if (isHave) {
         return {
           ...state,
-          cart: [
-            ...state.card.filter(
-              (datas) => datas.id !== action.payload.product.id
-            ),
-            action.payload,
-          ],
+          cart: state.cart.map((data) =>
+            data.product.id === action.payload.product.id
+              ? { ...data, count: data.count + action.payload.count }
+              : data
+          ),
         };
       } else {
         return { ...state, cart: [...state.cart, action.payload] };
       }
+    }
     case RemoveCart:
       return {
         ...state,

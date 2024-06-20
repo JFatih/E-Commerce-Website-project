@@ -24,11 +24,9 @@ export default function ProductDetailCard() {
     (datas) => datas.id == productId
   );
 
-  const cartData = useSelector((store) => store.ShoppingCart.cart);
-
   const handleAddtoCart = () => {
     let newData = { count: count, checked: true, product: productObject };
-    dispatch;
+    dispatch(setAddCart(newData));
   };
 
   console.log(productObject);
