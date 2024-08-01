@@ -31,7 +31,7 @@ const ShoppingCartReducer = (state = initialValue, action) => {
     case RemoveCart:
       return {
         ...state,
-        cart: state.cart.filter((data) => data.id !== action.payload),
+        cart: state.cart.filter((data) => data.product.id !== action.payload),
       };
     case AddPayment:
       return { ...state, payment: { ...state.payment, ...action.payload } };
