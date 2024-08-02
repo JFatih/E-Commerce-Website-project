@@ -2,6 +2,7 @@ import {
   AddAddress,
   AddCart,
   AddPayment,
+  Checked,
   RemoveAddress,
   RemoveCart,
   RemovePayment,
@@ -32,6 +33,19 @@ const ShoppingCartReducer = (state = initialValue, action) => {
       return {
         ...state,
         cart: state.cart.filter((data) => data.product.id !== action.payload),
+      };
+    case Checked:
+      return {
+        ...state,
+        cart: state.cart.map((data) => {
+          if (data.product.id === action.payload) {
+            return {
+              ...data,
+              checked: !data.checked,
+            };
+          }
+          return data;
+        }),
       };
     case AddPayment:
       return { ...state, payment: { ...state.payment, ...action.payload } };
