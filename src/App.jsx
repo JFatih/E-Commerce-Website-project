@@ -5,7 +5,6 @@ import Header from "./layout/header/Header";
 import HomePage from "./pages/HomePage";
 import Shop from "./pages/Shop";
 import Blog from "./pages/Blog";
-import Cart from "./pages/Cart";
 import AboutUs from "./pages/AboutUs";
 import ProductDetailCard from "./pages/ProductDetailCard";
 import Team from "./pages/TeamPage/Team";
@@ -21,6 +20,7 @@ import {
   fetchProductList,
   setCategories,
 } from "./store/action/ProductReducerAction";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   const dispatch = useDispatch();
