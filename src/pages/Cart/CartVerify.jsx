@@ -3,13 +3,28 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 
-export default function CartVerify({ groupBySeller }) {
+export default function CartVerify() {
+  const cartData = useSelector((store) => store.ShoppingCart.cart);
+  const [groupBySeller, setGroupBySeller] = useState({});
+
   const [totalShipDiscount, setTotalShipDiscount] = useState(0);
   const [totalShipCost, setTotalShipCost] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [discount, setDiscount] = useState("");
   const [discountRate, setDiscountRate] = useState(1);
+
+  useEffect(() => {
+    const grouped = cartData.reduce((result, data) => {
+      if (!result[data.product.store_id]) {
+        result[data.product.store_id] = [];
+      }
+      result[data.product.store_id].push(data);
+      return result;
+    }, {});
+
+    setGroupBySeller(grouped);
+  }, [cartData]);
 
   useEffect(() => {
     let shipDiscount = 0;

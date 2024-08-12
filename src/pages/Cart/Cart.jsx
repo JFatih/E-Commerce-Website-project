@@ -136,10 +136,7 @@ export default function Cart() {
           </div>
         ))}
       </div>
-      <CartVerify
-        groupBySeller={groupBySeller}
-        className="md:sticky top-0 self-start"
-      />
+      <CartVerify className="md:sticky top-0 self-start" />
     </div>
   );
 }
