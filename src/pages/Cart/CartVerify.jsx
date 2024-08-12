@@ -55,7 +55,7 @@ export default function CartVerify({ groupBySeller }) {
     totalCost * discountRate + totalShipCost - totalShipDiscount;
 
   return (
-    <div className="sh5 font-normal flex flex-col gap-3 sm:w-[450px] mx-auto md:my-20 ">
+    <div className="sh5 font-normal flex flex-col gap-3 sm:w-[450px] mx-auto md:mt-20 md:mb-10 md:sticky md:top-20 md:self-start">
       <div className="border rounded-md	 mt-5 p-2 flex flex-col gap-4">
         <p className="sh3 py-3">Order Summary</p>
         <div className="flex justify-between">

@@ -21,6 +21,7 @@ import {
   setCategories,
 } from "./store/action/ProductReducerAction";
 import Cart from "./pages/Cart/Cart";
+import Payment from "./pages/Cart/Payment";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ function App() {
         </Route>
         <Route path="/signin">
           <SignIn />
+        </Route>
+        <Route path="/cart/payment">
+          <Payment />
         </Route>
         <Route path="/cart">
           <Cart />

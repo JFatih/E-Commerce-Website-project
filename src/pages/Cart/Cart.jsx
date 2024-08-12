@@ -46,8 +46,8 @@ export default function Cart() {
   }, [cartData]);
 
   return (
-    <div className="mobileCardPadding my-10 mx-auto max-w-screen-xl lg:flex lg:gap-5">
-      <div className="flex flex-col gap-4">
+    <div className="mobileCardPadding my-10 mx-auto max-w-screen-xl lg:flex lg:gap-5 relative ">
+      <div className="flex flex-col gap-4 ">
         <p className="sh3 text-center md:text-start">
           Sepetim: {cartData.length}
         </p>
@@ -136,7 +136,10 @@ export default function Cart() {
           </div>
         ))}
       </div>
-      <CartVerify groupBySeller={groupBySeller} />
+      <CartVerify
+        groupBySeller={groupBySeller}
+        className="md:sticky top-0 self-start"
+      />
     </div>
   );
 }
