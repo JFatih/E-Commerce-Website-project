@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 
 export default function CartVerify({ groupBySeller }) {
@@ -55,7 +56,7 @@ export default function CartVerify({ groupBySeller }) {
     totalCost * discountRate + totalShipCost - totalShipDiscount;
 
   return (
-    <div className="sh5 font-normal flex flex-col gap-3 sm:w-[450px] mx-auto md:mt-20 md:mb-10 md:sticky md:top-20 md:self-start">
+    <div className="sh5 font-normal flex flex-col gap-3 sm:w-[450px] mx-auto  md:mt-20 md:mb-10 md:sticky md:top-20 md:self-start">
       <div className="border rounded-md	 mt-5 p-2 flex flex-col gap-4">
         <p className="sh3 py-3">Order Summary</p>
         <div className="flex justify-between">
@@ -118,9 +119,14 @@ export default function CartVerify({ groupBySeller }) {
           <button onClick={applyDiscountCode}>Apply</button>
         </div>
       </div>
-      <button className="bg-color3 text-white rounded-md sh4 py-2">
-        Confirm Cart
-      </button>
+      <Link to="/cart/payment">
+        <button
+          className="bg-color3 text-white rounded-md sh4 py-2 w-full"
+          disabled={!totalCost > 0}
+        >
+          Confirm Cart
+        </button>
+      </Link>
     </div>
   );
 }

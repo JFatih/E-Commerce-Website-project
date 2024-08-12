@@ -46,8 +46,8 @@ export default function Cart() {
   }, [cartData]);
 
   return (
-    <div className="mobileCardPadding my-10 mx-auto max-w-screen-xl lg:flex lg:gap-5 relative ">
-      <div className="flex flex-col gap-4 ">
+    <div className="mobileCardPadding my-10 mx-auto max-w-screen-xl lg:flex lg:gap-5 relative">
+      <div className="flex flex-col gap-4 md w-full">
         <p className="sh3 text-center md:text-start">
           Sepetim: {cartData.length}
         </p>

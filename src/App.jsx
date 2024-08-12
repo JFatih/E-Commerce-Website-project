@@ -63,11 +63,11 @@ function App() {
         <Route path="/signin">
           <SignIn />
         </Route>
-        <Route path="/cart/payment">
-          <Payment />
-        </Route>
         <Route path="/cart">
           <Cart />
+        </Route>
+        <Route path="/cart/payment">
+          <Payment />
         </Route>
         <Route path="/team">
           <Team />
