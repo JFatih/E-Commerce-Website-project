@@ -1,4 +1,6 @@
 import {
+  ClientAddress,
+  ClientCard,
   ClientLanguage,
   ClientRoles,
   ClientTheme,
@@ -31,6 +33,22 @@ const ClientReducer = (state = initialValue, action) => {
       return { ...state, theme: action.payload };
     case ClientLanguage:
       return { ...state, language: action.payload };
+    case ClientAddress:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          addressList: [...state.user.addressList, ...action.payload],
+        },
+      };
+    case ClientCard:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          creditCards: [...state.user.creditCards, ...action.payload],
+        },
+      };
     default:
       return state;
   }
