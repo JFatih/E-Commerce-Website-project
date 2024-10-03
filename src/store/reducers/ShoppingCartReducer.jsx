@@ -1,14 +1,19 @@
 import {
-  AddAddress,
   AddCart,
+  AddInvoiceAddress,
   AddPayment,
+  AddShippingAddress,
   Checked,
   RemoveAddress,
   RemoveCart,
   RemovePayment,
 } from "../action/ShoppingCartAction";
 
-const initialValue = { cart: [], payment: {}, address: {} };
+const initialValue = {
+  cart: [],
+  payment: {},
+  address: { shippingAddress: {}, invoiceAddress: {} },
+};
 
 const ShoppingCartReducer = (state = initialValue, action) => {
   switch (action.type) {
@@ -48,14 +53,22 @@ const ShoppingCartReducer = (state = initialValue, action) => {
         }),
       };
     case AddPayment:
-      return { ...state, payment: { ...state.payment, ...action.payload } };
+      return { ...state, payment: { ...action.payload } };
     case RemovePayment:
       return {
         ...state,
         payment: state.payment.filter((data) => data !== action.payload),
       };
-    case AddAddress:
-      return { ...state, address: { ...state.address, ...action.payload } };
+    case AddShippingAddress:
+      return {
+        ...state,
+        address: { ...state.address, shippingAddress: { ...action.payload } },
+      };
+    case AddInvoiceAddress:
+      return {
+        ...state,
+        address: { ...state.address, invoiceAddress: { ...action.payload } },
+      };
     case RemoveAddress:
       return {
         ...state,

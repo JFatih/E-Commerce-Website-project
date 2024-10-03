@@ -16,12 +16,10 @@ import SignIn from "./pages/RegisterLogin/SignIn";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUserWToken } from "./store/action/ClientReducerAction";
-import {
-  fetchProductList,
-  setCategories,
-} from "./store/action/ProductReducerAction";
+import { setCategories } from "./store/action/ProductReducerAction";
 import Cart from "./pages/Cart/Cart";
-import Payment from "./pages/Cart/Payment";
+import ProtectedRoute from "./ProtectedRoute";
+import PaymentPage from "./pages/Payment/PaymentPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -63,11 +61,11 @@ function App() {
         <Route path="/signin">
           <SignIn />
         </Route>
+        <ProtectedRoute exact path="/cart/payment">
+          <PaymentPage />
+        </ProtectedRoute>
         <Route path="/cart">
           <Cart />
-        </Route>
-        <Route path="/cart/payment">
-          <Payment />
         </Route>
         <Route path="/team">
           <Team />

@@ -5,6 +5,8 @@ export const ClientUser = "User";
 export const ClientRoles = "Client Roles";
 export const ClientTheme = "Client Theme";
 export const ClientLanguage = "Client Language";
+export const ClientAddress = "Client saved Address data";
+export const ClientCard = "Client saved Cart data";
 
 export const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com/",
@@ -25,6 +27,15 @@ export const setTheme = (theme) => {
 
 export const setLanguage = (language) => {
   return { type: ClientLanguage, payload: language };
+};
+
+export const setAddress = (data) => {
+  console.log("setAddres action çalıştı");
+  return { type: ClientAddress, payload: data };
+};
+
+export const setCard = (data) => {
+  return { type: ClientCard, payload: data };
 };
 
 export const fetchUser = (creds, history) => async (dispatch) => {
@@ -54,6 +65,28 @@ export const fetchRoles = () => async (dispatch) => {
   }
 };
 
+export const fetchAddress = (token) => async (dispatch) => {
+  try {
+    const res = await instance.get("/user/address", {
+      headers: { Authorization: token },
+    });
+    dispatch(setAddress(res.data));
+  } catch (err) {
+    toast("Address request failed " + err.data);
+  }
+};
+
+export const fetchCardData = (token) => async (dispatch) => {
+  try {
+    const res = await instance.get("/user/card", {
+      headers: { Authorization: token },
+    });
+    dispatch(setCard(res.data));
+  } catch (err) {
+    toast("Card data request failed. " + err);
+  }
+};
+
 export const fetchUserWToken = (token) => async (dispatch) => {
   try {
     const res = await instance.get("/verify", {
@@ -65,5 +98,37 @@ export const fetchUserWToken = (token) => async (dispatch) => {
   } catch (err) {
     localStorage.removeItem("token");
     toast("Otomatik Giriş için Şifreniz geçerli değildir");
+  }
+};
+
+export const createAddress = (data, token) => async (dispatch) => {
+  try {
+    if (data.id) {
+      await instance.put("/user/address", data, {
+        headers: { Authorization: token },
+      });
+      toast("Address has been update.");
+    } else {
+      await instance.post("/user/address", data, {
+        headers: { Authorization: token },
+      });
+      toast("Address has been added.");
+    }
+
+    dispatch(fetchAddress(token));
+  } catch (err) {
+    toast(err);
+  }
+};
+
+export const deleteAddress = (data, token) => async (dispatch) => {
+  try {
+    await instance.delete(`/user/address/${data.id}`, {
+      headers: { Authorization: token },
+    });
+    toast(`Title: ${data.title} succesfully deleted!`);
+    dispatch(fetchAddress(token));
+  } catch (err) {
+    toast(err);
   }
 };

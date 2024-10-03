@@ -35,7 +35,9 @@ export default function Header() {
           </div>
           <div className="flex gap-3 items-center text-[1.2rem] smobile-menu">
             <i className="fa-solid fa-magnifying-glass"></i>
-            <CartIcon />
+            <Link to="/cart">
+              <CartIcon />
+            </Link>
             {userEmail.email ? (
               <div className="flex flex-row gap-1">
                 <Link to="/" className="flex items-center gap-2">
