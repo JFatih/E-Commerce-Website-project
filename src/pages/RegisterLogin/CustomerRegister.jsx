@@ -34,7 +34,6 @@ export default function CustomerRegister({ setCustomer, rolesData }) {
 
   const onSubmit = async (data) => {
     try {
-      console.log("butona basıldı");
       setLoading(true);
       const formData = { ...data };
       delete formData.password2;

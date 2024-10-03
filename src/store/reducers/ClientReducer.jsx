@@ -38,7 +38,7 @@ const ClientReducer = (state = initialValue, action) => {
         ...state,
         user: {
           ...state.user,
-          addressList: [...state.user.addressList, ...action.payload],
+          addressList: [...action.payload],
         },
       };
     case ClientCard:

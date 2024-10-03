@@ -19,7 +19,7 @@ import { fetchUserWToken } from "./store/action/ClientReducerAction";
 import { setCategories } from "./store/action/ProductReducerAction";
 import Cart from "./pages/Cart/Cart";
 import ProtectedRoute from "./ProtectedRoute";
-import Payment from "./pages/Payment/Payment";
+import PaymentPage from "./pages/Payment/PaymentPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ function App() {
           <SignIn />
         </Route>
         <ProtectedRoute exact path="/cart/payment">
-          <Payment />
+          <PaymentPage />
         </ProtectedRoute>
         <Route path="/cart">
           <Cart />

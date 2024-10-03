@@ -100,3 +100,35 @@ export const fetchUserWToken = (token) => async (dispatch) => {
     toast("Otomatik Giriş için Şifreniz geçerli değildir");
   }
 };
+
+export const createAddress = (data, token) => async (dispatch) => {
+  try {
+    if (data.id) {
+      await instance.put("/user/address", data, {
+        headers: { Authorization: token },
+      });
+      toast("Address has been update.");
+    } else {
+      await instance.post("/user/address", data, {
+        headers: { Authorization: token },
+      });
+      toast("Address has been added.");
+    }
+
+    dispatch(fetchAddress(token));
+  } catch (err) {
+    toast(err);
+  }
+};
+
+export const deleteAddress = (data, token) => async (dispatch) => {
+  try {
+    await instance.delete(`/user/address/${data.id}`, {
+      headers: { Authorization: token },
+    });
+    toast(`Title: ${data.title} succesfully deleted!`);
+    dispatch(fetchAddress(token));
+  } catch (err) {
+    toast(err);
+  }
+};
