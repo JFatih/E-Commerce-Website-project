@@ -30,11 +30,10 @@ export const setLanguage = (language) => {
 };
 
 export const setAddress = (data) => {
-  console.log("setAddres action çalıştı");
   return { type: ClientAddress, payload: data };
 };
 
-export const setCard = (data) => {
+export const setCardData = (data) => {
   return { type: ClientCard, payload: data };
 };
 
@@ -65,28 +64,6 @@ export const fetchRoles = () => async (dispatch) => {
   }
 };
 
-export const fetchAddress = (token) => async (dispatch) => {
-  try {
-    const res = await instance.get("/user/address", {
-      headers: { Authorization: token },
-    });
-    dispatch(setAddress(res.data));
-  } catch (err) {
-    toast("Address request failed " + err.data);
-  }
-};
-
-export const fetchCardData = (token) => async (dispatch) => {
-  try {
-    const res = await instance.get("/user/card", {
-      headers: { Authorization: token },
-    });
-    dispatch(setCard(res.data));
-  } catch (err) {
-    toast("Card data request failed. " + err);
-  }
-};
-
 export const fetchUserWToken = (token) => async (dispatch) => {
   try {
     const res = await instance.get("/verify", {
@@ -98,6 +75,17 @@ export const fetchUserWToken = (token) => async (dispatch) => {
   } catch (err) {
     localStorage.removeItem("token");
     toast("Otomatik Giriş için Şifreniz geçerli değildir");
+  }
+};
+
+export const fetchAddress = (token) => async (dispatch) => {
+  try {
+    const res = await instance.get("/user/address", {
+      headers: { Authorization: token },
+    });
+    dispatch(setAddress(res.data));
+  } catch (err) {
+    toast("Address request failed " + err.data);
   }
 };
 
@@ -128,6 +116,49 @@ export const deleteAddress = (data, token) => async (dispatch) => {
     });
     toast(`Title: ${data.title} succesfully deleted!`);
     dispatch(fetchAddress(token));
+  } catch (err) {
+    toast(err);
+  }
+};
+
+export const fetchCardData = (token) => async (dispatch) => {
+  try {
+    const res = await instance.get("/user/card", {
+      headers: { Authorization: token },
+    });
+    dispatch(setCardData(res.data));
+  } catch (err) {
+    toast("Card data request failed. " + err);
+  }
+};
+
+export const createCardData = (data, token) => async (dispatch) => {
+  try {
+    if (data.id) {
+      await instance.put("/user/card", data, {
+        headers: { Authorization: token },
+      });
+      toast("Card data has been update.");
+    } else {
+      await instance.post("/user/card", data, {
+        headers: { Authorization: token },
+      });
+      toast("Card data has been added.");
+    }
+
+    dispatch(fetchCardData(token));
+  } catch (err) {
+    toast(err);
+  }
+};
+
+export const deleteCardData = (data, token) => async (dispatch) => {
+  try {
+    await instance.delete(`/user/card/${data.id}`, {
+      headers: { Authorization: token },
+    });
+    toast(`Card succesfully removed!`);
+    dispatch(fetchCardData(token));
   } catch (err) {
     toast(err);
   }

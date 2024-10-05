@@ -4,21 +4,39 @@ import {
   setAddInvoiceAddress,
   setAddShippingAddress,
 } from "../../../store/action/ShoppingCartAction";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AddressSection() {
-  const [seperateAddress, setSeperateAddress] = useState(true);
-  const [shipAddress, setShipAddress] = useState(null);
-  const [invoiceAddress, setInvoiceAddress] = useState(null);
+  const cartAddress = useSelector((store) => store.ShoppingCart.address);
+  const dispatch = useDispatch();
+
+  const isSeperate = !(
+    cartAddress.shippingAddress && cartAddress.invoiceAddress
+  );
+
+  const [seperateAddress, setSeperateAddress] = useState(isSeperate);
+  const [shipAddress, setShipAddress] = useState(
+    cartAddress.shippingAddress || undefined
+  );
+  const [invoiceAddress, setInvoiceAddress] = useState(
+    cartAddress.invoiceAddress || undefined
+  );
 
   useEffect(() => {
     if (seperateAddress) {
-      setInvoiceAddress(null);
-      setAddInvoiceAddress(null);
-    } else {
-      setAddInvoiceAddress(invoiceAddress);
+      dispatch(setAddInvoiceAddress(undefined));
     }
-    setAddShippingAddress(shipAddress);
-  }, [seperateAddress, invoiceAddress, shipAddress]);
+  }, [seperateAddress, dispatch]);
+
+  const handleShippingAddressChange = (data) => {
+    dispatch(setAddShippingAddress(data));
+    setShipAddress(data);
+  };
+
+  const handleInvoiceAddressChange = (data) => {
+    dispatch(setAddInvoiceAddress(data));
+    setInvoiceAddress(data);
+  };
 
   const AddressCheckbox = ({ id }) => (
     <div className="flex gap-1">
@@ -27,7 +45,7 @@ export default function AddressSection() {
         className="w-4"
         id={id}
         checked={seperateAddress}
-        onChange={() => setSeperateAddress(!seperateAddress)}
+        onChange={() => setSeperateAddress((prev) => !prev)}
       />
       <label htmlFor={id} className="cursor-pointer">
         Same Invoice Address
@@ -42,7 +60,7 @@ export default function AddressSection() {
       </div>
 
       <div className="w-full flex flex-col gap-5 lg:flex-row lg:px-3 lg:p-1 items-center lg:items-start">
-        <div className="lg:w-full max-w-[331px]">
+        <div className="w-full max-w-[331px]">
           <div className="py-1 flex flex-col justify-center items-center">
             <p className="text-center py-1 text-alertColor sh3">
               Shipping Address
@@ -51,14 +69,22 @@ export default function AddressSection() {
               <AddressCheckbox id="invoiceAddress-sm" />
             </div>
           </div>
-          <AddressSelector setter={setShipAddress} />
+          <AddressSelector
+            selectedAddressData={shipAddress}
+            setSelecetAddressData={setShipAddress}
+            dispatchAddress={handleShippingAddressChange}
+          />
         </div>
         {!seperateAddress && (
-          <div className="lg:w-full max-w-[331px]">
+          <div className="w-full max-w-[331px]">
             <p className="text-center py-2 text-alertColor sh3">
               Invoice Address
             </p>
-            <AddressSelector setter={setInvoiceAddress} />
+            <AddressSelector
+              selectedAddressData={invoiceAddress}
+              setSelecetAddressData={setInvoiceAddress}
+              dispatchAddress={handleInvoiceAddressChange}
+            />
           </div>
         )}
       </div>

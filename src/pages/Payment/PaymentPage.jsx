@@ -3,15 +3,35 @@ import CartVerify from "../Cart/CartVerify";
 import { useEffect, useState } from "react";
 import AddressSection from "./AddressSection/AddressSection";
 import PaymentSection from "./PaymentSection/PaymentSection";
+
 import {
   fetchAddress,
   fetchCardData,
 } from "../../store/action/ClientReducerAction";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function PaymentPage() {
+  const cartData = useSelector((store) => store.ShoppingCart);
   const userData = useSelector((store) => store.Client.user);
   const dispatch = useDispatch();
+  let history = useHistory();
+  const direction = () => {
+    if (
+      !cartData.address.shippingAddress ||
+      cartData.address.shippingAddress.length === 0
+    ) {
+      toast("Please Select Address!!");
+    } else if (
+      !cartData.payment ||
+      Object.keys(cartData.payment).length === 0
+    ) {
+      toast("Please Select Payment Card!!");
+    } else {
+      history.push("/payment/newOrder");
+    }
+  };
 
   useEffect(() => {
     if (userData?.token) {
@@ -47,7 +67,7 @@ export default function PaymentPage() {
           {section ? <AddressSection /> : <PaymentSection />}
         </div>
       </div>
-      <CartVerify />
+      <CartVerify direction={direction} />
     </div>
   );
 }

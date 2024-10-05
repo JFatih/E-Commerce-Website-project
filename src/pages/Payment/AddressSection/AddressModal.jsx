@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { createAddress } from "../../store/action/ClientReducerAction";
+import { createAddress } from "../../../store/action/ClientReducerAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-export default function Modal({ addressData }) {
+export default function AddressModal({ addressData }) {
   const userData = useSelector((store) => store.Client.user);
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ export default function Modal({ addressData }) {
     <div>
       <dialog
         id="address_modal"
-        className=" modal-bottom sm:modal-middle md:w-5/12 rounded-lg py-2 px-4 mobileCardPadding shadow-2xl"
+        className="bg-white modal-bottom sm:modal-middle md:w-5/12 rounded-lg py-2 px-4 mobileCardPadding shadow-2xl"
       >
         <div className="modal-box min-w-72">
           <div className="flex justify-between">

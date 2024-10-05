@@ -46,7 +46,7 @@ const ClientReducer = (state = initialValue, action) => {
         ...state,
         user: {
           ...state.user,
-          creditCards: [...state.user.creditCards, ...action.payload],
+          creditCards: [...action.payload],
         },
       };
     default:
