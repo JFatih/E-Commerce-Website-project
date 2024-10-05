@@ -1,58 +1,68 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAddress } from "../../../store/action/ClientReducerAction";
-import Modal from "../Modal";
+import PaymentModal from "./PaymentModal";
+import { deleteCardData } from "../../../store/action/ClientReducerAction";
+import { setAddPayment } from "../../../store/action/ShoppingCartAction";
 
 export default function PaymentSelector() {
-  const userAddressData = useSelector((store) => store.Client.user.addressList);
+  const userCardData = useSelector((store) => store.Client.user.creditCards);
+  const cartCardData = useSelector((store) => store.ShoppingCart.payment);
+  useEffect(() => {
+    if (cartCardData) {
+      setSelectCardId(cartCardData.id);
+    }
+  }, []);
   const userToken = useSelector((store) => store.Client.user.token);
-  const [selectAddress, setSelectAddress] = useState(null);
-  const [selectAddressId, setSelectAddressId] = useState(null);
+  const [selectCard, setSelectCard] = useState(undefined);
+  const [selectCardId, setSelectCardId] = useState(undefined);
   const dispatch = useDispatch();
 
-  const deleteAddressHandle = (data) => {
-    dispatch(deleteAddress(data, userToken));
+  const deleteCardHandle = (data) => {
+    dispatch(deleteCardData(data, userToken));
   };
 
-  const handleAddNewAddress = () => {
-    setSelectAddress(null);
-    document.getElementById("address_modal").showModal();
+  const handleAddNewCard = () => {
+    setSelectCard(undefined);
+    document.getElementById("payment_modal").showModal();
   };
 
-  const handleEditNewAddress = (data) => {
-    setSelectAddress(data);
-    document.getElementById("address_modal").showModal();
+  const handleEditCard = (data) => {
+    setSelectCard(data);
+    document.getElementById("payment_modal").showModal();
   };
 
   const handleCheckboxSelect = (data) => {
-    if (selectAddressId == data.id) {
-      setSelectAddressId(null);
-      setter(null);
+    if (selectCardId !== undefined && selectCardId === data.id) {
+      setSelectCardId(undefined);
+      dispatch(setAddPayment(undefined));
     } else {
-      setSelectAddressId(data.id);
-      setter(data.id);
+      setSelectCardId(data.id);
+      dispatch(setAddPayment(data));
     }
   };
+
   return (
     <div>
-      <Modal addressData={selectAddress} />
-      {userAddressData.length >= 0 ? (
+      <PaymentModal paymentData={selectCard} />
+      {userCardData.length >= 0 ? (
         <div>
           <button
-            className="py-2 px-5 bg-lightTextGray rounded-md w-full border"
-            onClick={handleAddNewAddress}
+            className={`${
+              selectCardId ? "hidden" : "none"
+            } py-2 px-5 bg-lightTextGray rounded-md w-full border`}
+            onClick={handleAddNewCard}
           >
             <p className="sh2 leading-8 text-alertColor">+</p>
-            <p className="sh5">Add Address</p>
+            <p className="sh5">Add Payment</p>
           </button>
-          {userAddressData.map((data, index) => (
+          {userCardData.map((data, index) => (
             <div
               key={index}
               onClick={() => handleCheckboxSelect(data)}
               className={`${
-                selectAddressId == null
+                selectCardId == undefined
                   ? "none"
-                  : selectAddressId == data.id
+                  : selectCardId == data.id
                   ? "none"
                   : "hidden"
               }`}
@@ -62,19 +72,16 @@ export default function PaymentSelector() {
                   <input
                     type="radio"
                     className="w-4 rounded-full"
-                    checked={selectAddressId === data.id}
+                    checked={selectCardId === data.id}
                     id={`radio-${data.id}`}
                     onChange={() => handleCheckboxSelect(data)}
                   />
-                  <label>{data.title}</label>
                 </div>
                 <div className="flex gap-3">
-                  <button onClick={() => handleEditNewAddress(data)}>
-                    Edit
-                  </button>
+                  <button onClick={() => handleEditCard(data)}>Edit</button>
                   <button
                     className="pr-1"
-                    onClick={() => deleteAddressHandle(data)}
+                    onClick={() => deleteCardHandle(data)}
                   >
                     <i className="fa-solid fa-trash"></i>
                   </button>
@@ -82,28 +89,25 @@ export default function PaymentSelector() {
               </div>
               <div
                 className={`${
-                  selectAddressId === data.id ? "bg-mutedTextColor" : ""
+                  selectCardId === data.id ? "bg-mutedTextColor" : ""
                 } p-2 bg-lightTextGray rounded-md w-full border py-4 flex flex-col gap-3`}
               >
-                <div className="flex flex-col gap-1 justify-center">
-                  <div className="flex justify-between">
-                    <p>
-                      {data.name} {data.surname}
+                <div className="flex justify-end ">
+                  <div className="flex flex-col items-end sh6 w-full gap-5">
+                    <p className="sh5 pr-4 mb-6">
+                      {data["card_no"].slice(0, 4) +
+                        " " +
+                        data["card_no"].slice(4, 6) +
+                        "** **** " +
+                        data["card_no"].slice(-4)}
                     </p>
-                    <p className="sh6">
-                      <i className="fa-solid fa-mobile"></i>{" "}
-                      {"(" +
-                        data.phone.slice(1, 4) +
-                        ") *** ** " +
-                        data.phone.slice(-2)}
-                    </p>
+                    <div className="flex justify-between w-full sh5">
+                      <p className="text-left pl-4">{data["name_on_card"]}</p>
+                      <p className="text-right pr-4">
+                        {data.expire_month}/{data.expire_year}
+                      </p>
+                    </div>
                   </div>
-                  <p>
-                    {data.address} {data.neighborhood}
-                  </p>
-                  <p>
-                    {data.city} / {data.district}
-                  </p>
                 </div>
               </div>
             </div>

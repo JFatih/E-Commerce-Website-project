@@ -6,12 +6,21 @@ import {
 } from "../../store/action/ShoppingCartAction";
 import CartVerify from "./CartVerify";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Cart() {
   const cartData = useSelector((store) => store.ShoppingCart.cart);
   const [groupBySeller, setGroupBySeller] = useState({});
-
   const dispatch = useDispatch();
+  let history = useHistory();
+  const direction = () => {
+    if (!cartData) {
+      toast("Add the product you want to buy to your cart");
+    } else {
+      history.push("/cart/payment");
+    }
+  };
 
   const increaseCount = (data) => {
     dispatch(
@@ -136,7 +145,7 @@ export default function Cart() {
           </div>
         ))}
       </div>
-      <CartVerify className="md:sticky top-0 self-start" />
+      <CartVerify direction={direction} />
     </div>
   );
 }

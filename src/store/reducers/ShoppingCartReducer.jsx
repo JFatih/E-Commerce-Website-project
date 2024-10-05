@@ -4,15 +4,13 @@ import {
   AddPayment,
   AddShippingAddress,
   Checked,
-  RemoveAddress,
   RemoveCart,
-  RemovePayment,
 } from "../action/ShoppingCartAction";
 
 const initialValue = {
   cart: [],
   payment: {},
-  address: { shippingAddress: {}, invoiceAddress: {} },
+  address: { shippingAddress: [], invoiceAddress: [] },
 };
 
 const ShoppingCartReducer = (state = initialValue, action) => {
@@ -54,25 +52,15 @@ const ShoppingCartReducer = (state = initialValue, action) => {
       };
     case AddPayment:
       return { ...state, payment: { ...action.payload } };
-    case RemovePayment:
-      return {
-        ...state,
-        payment: state.payment.filter((data) => data !== action.payload),
-      };
     case AddShippingAddress:
       return {
         ...state,
-        address: { ...state.address, shippingAddress: { ...action.payload } },
+        address: { ...state.address, shippingAddress: action.payload },
       };
     case AddInvoiceAddress:
       return {
         ...state,
-        address: { ...state.address, invoiceAddress: { ...action.payload } },
-      };
-    case RemoveAddress:
-      return {
-        ...state,
-        address: state.address.filter((data) => data !== action.payload),
+        address: { ...state.address, invoiceAddress: action.payload },
       };
     default:
       return state;

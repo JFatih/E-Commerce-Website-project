@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 
-export default function CartVerify() {
+export default function CartVerify({ direction }) {
   const cartData = useSelector((store) => store.ShoppingCart.cart);
   const [groupBySeller, setGroupBySeller] = useState({});
 
@@ -134,14 +133,14 @@ export default function CartVerify() {
           <button onClick={applyDiscountCode}>Apply</button>
         </div>
       </div>
-      <Link to="/cart/payment">
-        <button
-          className="bg-color3 text-white rounded-md sh4 py-2 w-full"
-          disabled={!totalCost > 0}
-        >
-          Confirm Cart
-        </button>
-      </Link>
+
+      <button
+        className="bg-color3 text-white rounded-md sh4 py-2 w-full"
+        disabled={!totalCost > 0}
+        onClick={direction}
+      >
+        Confirm Cart
+      </button>
     </div>
   );
 }
