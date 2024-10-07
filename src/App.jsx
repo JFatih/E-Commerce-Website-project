@@ -20,6 +20,7 @@ import { setCategories } from "./store/action/ProductReducerAction";
 import Cart from "./pages/Cart/Cart";
 import ProtectedRoute from "./ProtectedRoute";
 import PaymentPage from "./pages/Payment/PaymentPage";
+import OrderStatus from "./pages/Order/OrderStatus";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,9 @@ function App() {
         </Route>
         <Route path="/shop/:gender/:categoryName/:categoryId">
           <Shop />
+        </Route>
+        <Route path="/order/status/:orderId">
+          <OrderStatus />
         </Route>
         <Route path="/shop/:gender">
           <Shop />
