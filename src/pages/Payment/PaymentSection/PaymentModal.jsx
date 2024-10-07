@@ -12,6 +12,7 @@ export default function PaymentModal({ paymentData }) {
     expire_month: "",
     expire_year: "",
     name_on_card: "",
+    card_ccv: "",
   };
 
   const {
@@ -29,6 +30,7 @@ export default function PaymentModal({ paymentData }) {
   }, [paymentData, reset]);
 
   const onSubmit = (data) => {
+    delete data.card_ccv;
     document.getElementById("payment_modal").close();
     dispatch(createCardData(data, userData.token));
     reset(defaultValues);
@@ -121,6 +123,23 @@ export default function PaymentModal({ paymentData }) {
             {errors.name_on_card && (
               <div className="form-error text-dangerTextColor text-sm">
                 Please enter a valid name
+              </div>
+            )}
+
+            <input
+              {...register("card_ccv", {
+                required: true,
+                minLength: 3,
+                maxLength: 3,
+                pattern: /^\d{3}$/,
+              })}
+              className="border bg-white h-10 px-5 my-2"
+              placeholder="Card CCV"
+              type="number"
+            />
+            {errors.card_ccv && (
+              <div className="form-error text-dangerTextColor text-sm">
+                CCV must be 3 digits
               </div>
             )}
 

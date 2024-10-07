@@ -10,9 +10,7 @@ export default function AddressSection() {
   const cartAddress = useSelector((store) => store.ShoppingCart.address);
   const dispatch = useDispatch();
 
-  const isSeperate = !(
-    cartAddress.shippingAddress && cartAddress.invoiceAddress
-  );
+  const isSeperate = !cartAddress.invoiceAddress;
 
   const [seperateAddress, setSeperateAddress] = useState(isSeperate);
   const [shipAddress, setShipAddress] = useState(

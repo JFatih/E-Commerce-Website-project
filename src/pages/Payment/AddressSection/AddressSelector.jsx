@@ -42,7 +42,9 @@ export default function AddressSelector({
       <Modal addressData={modalAddress} />
       <button
         className={`${
-          selectedAddressData ? "hidden" : "none"
+          selectedAddressData && Object.keys(selectedAddressData).length > 0
+            ? "hidden"
+            : "none"
         } py-2 px-5 bg-lightTextGray rounded-md w-full border`}
         onClick={handleAddNewAddress}
       >
