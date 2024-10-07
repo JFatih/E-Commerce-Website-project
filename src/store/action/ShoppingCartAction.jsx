@@ -7,6 +7,8 @@ export const RemoveAddress = "Remove Address Data";
 export const Checked = "Change product check";
 export const AddInvoiceAddress = "Add Invoice Address";
 export const AddShippingAddress = "Add ship address";
+export const AddCardCCV = "Add card Ccv but dont save to database";
+export const ResetCartData = "Reset Cart to initial Value";
 
 export const setAddCart = (data) => {
   return { type: AddCart, payload: data };
@@ -38,4 +40,12 @@ export const setAddShippingAddress = (data) => {
 
 export const setRemoveAddress = (data) => {
   return { type: RemoveAddress, payload: data };
+};
+
+export const setCardCcv = (data) => {
+  return { type: AddCardCCV, payload: data };
+};
+
+export const resetCart = () => {
+  return { type: ResetCartData };
 };

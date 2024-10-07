@@ -1,10 +1,12 @@
 import {
+  AddCardCCV,
   AddCart,
   AddInvoiceAddress,
   AddPayment,
   AddShippingAddress,
   Checked,
   RemoveCart,
+  ResetCartData,
 } from "../action/ShoppingCartAction";
 
 const initialValue = {
@@ -61,6 +63,17 @@ const ShoppingCartReducer = (state = initialValue, action) => {
       return {
         ...state,
         address: { ...state.address, invoiceAddress: action.payload },
+      };
+    case AddCardCCV:
+      return {
+        ...state,
+        payment: { ...state.payment, ...action.payload },
+      };
+    case ResetCartData:
+      return {
+        cart: [],
+        payment: {},
+        address: { shippingAddress: [], invoiceAddress: [] },
       };
     default:
       return state;
