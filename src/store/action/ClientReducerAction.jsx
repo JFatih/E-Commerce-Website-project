@@ -7,6 +7,7 @@ export const ClientTheme = "Client Theme";
 export const ClientLanguage = "Client Language";
 export const ClientAddress = "Client saved Address data";
 export const ClientCard = "Client saved Cart data";
+export const ClientOrders = "Fetch Client Orders";
 
 export const instance = axios.create({
   baseURL: "https://workintech-fe-ecommerce.onrender.com/",
@@ -35,6 +36,10 @@ export const setAddress = (data) => {
 
 export const setCardData = (data) => {
   return { type: ClientCard, payload: data };
+};
+
+export const setOrders = (data) => {
+  return { type: ClientOrders, payload: data };
 };
 
 export const fetchUser = (creds, history) => async (dispatch) => {
@@ -159,6 +164,17 @@ export const deleteCardData = (data, token) => async (dispatch) => {
     });
     toast(`Card succesfully removed!`);
     dispatch(fetchCardData(token));
+  } catch (err) {
+    toast(err);
+  }
+};
+
+export const fetchUserOrders = (token) => async (dispatch) => {
+  try {
+    const res = await instance.get("/order", {
+      headers: { Authorization: token },
+    });
+    dispatch(setOrders(res.data));
   } catch (err) {
     toast(err);
   }

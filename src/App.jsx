@@ -21,6 +21,7 @@ import Cart from "./pages/Cart/Cart";
 import ProtectedRoute from "./ProtectedRoute";
 import PaymentPage from "./pages/Payment/PaymentPage";
 import OrderStatus from "./pages/Order/OrderStatus";
+import Orders from "./pages/Order/Orders";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
         <Route path="/order/status/:orderId">
           <OrderStatus />
         </Route>
+        <ProtectedRoute path="/orders">
+          <Orders />
+        </ProtectedRoute>
         <Route path="/shop/:gender">
           <Shop />
         </Route>

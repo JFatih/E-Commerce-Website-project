@@ -2,6 +2,7 @@ import {
   ClientAddress,
   ClientCard,
   ClientLanguage,
+  ClientOrders,
   ClientRoles,
   ClientTheme,
   ClientUser,
@@ -47,6 +48,14 @@ const ClientReducer = (state = initialValue, action) => {
         user: {
           ...state.user,
           creditCards: [...action.payload],
+        },
+      };
+    case ClientOrders:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          orders: action.payload,
         },
       };
     default:
