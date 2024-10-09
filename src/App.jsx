@@ -42,9 +42,9 @@ function App() {
         <Route path="/shop/:gender/:categoryName/:categoryId">
           <Shop />
         </Route>
-        <Route path="/order/status/:orderId">
+        <ProtectedRoute path="/order/status/:orderId">
           <OrderStatus />
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path="/orders">
           <Orders />
         </ProtectedRoute>

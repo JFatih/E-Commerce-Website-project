@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCardCcv } from "../../store/action/ShoppingCartAction";
 
 export default function CcvModal({ orderPaymentData, direction }) {
   const dispatch = useDispatch();
+  const cardCcv = useSelector((store) => store.ShoppingCart.payment.card_ccv);
 
   const defaultValues = {
     card_ccv: "",
@@ -26,9 +27,16 @@ export default function CcvModal({ orderPaymentData, direction }) {
 
   const onSubmit = (data) => {
     document.getElementById("ccv_modal").close();
+    console.log(data);
     dispatch(setCardCcv(data));
     reset(defaultValues);
   };
+
+  useEffect(() => {
+    if (cardCcv) {
+      direction();
+    }
+  }, [cardCcv]);
 
   return (
     <div>

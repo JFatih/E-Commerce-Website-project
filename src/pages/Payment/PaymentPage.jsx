@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import CcvModal from "./CcvModal";
 import { resetCart } from "../../store/action/ShoppingCartAction";
+import OrderStatus from "../Order/OrderStatus";
 
 export default function PaymentPage() {
   const cartData = useSelector((store) => store.ShoppingCart);
@@ -29,17 +30,20 @@ export default function PaymentPage() {
   }, [dispatch, userData.token]);
 
   let history = useHistory();
+
   const direction = () => {
     if (
       !cartData.address.shippingAddress ||
       cartData.address.shippingAddress.length === 0
     ) {
       toast("Please Select Address!!");
+      return;
     } else if (
       !cartData.payment ||
       Object.keys(cartData.payment).length === 0
     ) {
       toast("Please Select Payment Card!!");
+      return;
     }
 
     if (!cartData.payment.card_ccv) {
@@ -47,6 +51,10 @@ export default function PaymentPage() {
       return;
     }
 
+    submitOrder();
+  };
+
+  const submitOrder = () => {
     if (cartData.payment.card_ccv) {
       const orderData = {
         address_id: cartData.address.shippingAddress.id,
@@ -69,7 +77,7 @@ export default function PaymentPage() {
         })),
       };
 
-      const submitOrder = async () => {
+      const makeOrder = async () => {
         try {
           const res = await instance.post("/order", orderData, {
             headers: { Authorization: userData.token },
@@ -79,14 +87,12 @@ export default function PaymentPage() {
             state: { orderResponse: res.data },
           });
           dispatch(resetCart());
-          console.log(res);
         } catch (err) {
           toast("Order could not be placed: " + err);
-          console.log(err);
         }
       };
 
-      submitOrder();
+      makeOrder();
     }
   };
 
@@ -116,9 +122,7 @@ export default function PaymentPage() {
         </div>
       </div>
       <CartVerify direction={direction} />
-      <CcvModal orderPaymentData={cartData.payment} />
+      <CcvModal orderPaymentData={cartData.payment} direction={direction} />
     </div>
   );
 }
-
-export const transformOrderData = (data) => {};

@@ -31,11 +31,9 @@ export default function PaymentModal({ paymentData }) {
   }, [paymentData, reset]);
 
   const onSubmit = (data) => {
-    const cardCcv = data.card_ccv;
     delete data.card_ccv;
     document.getElementById("payment_modal").close();
     dispatch(createCardData(data, userData.token));
-    dispatch(setCardCcv(cardCcv));
     reset(defaultValues);
   };
 

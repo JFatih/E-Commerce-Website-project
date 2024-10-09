@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function OrderStatus() {
   const location = useLocation();
@@ -19,9 +20,11 @@ export default function OrderStatus() {
           <span className="text-blue-600">{orderResponse.price} TL</span>
         </p>
       </div>
-      <button className="mt-4 px-6 py-2 bg-color3 text-white rounded-lg shadow hover:bg-green-600 transition">
-        Go to Orders Page
-      </button>
+      <Link to="/orders">
+        <button className="mt-4 px-6 py-2 bg-color3 text-white rounded-lg shadow hover:bg-green-600 transition">
+          Go to Orders Page
+        </button>
+      </Link>
     </div>
   );
 }
