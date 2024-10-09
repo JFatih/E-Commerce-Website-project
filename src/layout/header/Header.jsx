@@ -40,16 +40,26 @@ export default function Header() {
             </Link>
             {userEmail.email ? (
               <div className="flex flex-row gap-1">
-                <Link to="/" className="flex items-center gap-2">
-                  <div className="flex flex-row gap-2 items-center text-[17px] ">
-                    <img
-                      id="gravatar-image"
-                      alt="Gravatar"
-                      className="rounded-full w-8 h-8"
-                    />
-                    <p className="hidden lg:block">{userEmail.name}</p>
+                <div className="relative inline-block group">
+                  <Link to="/" className="flex items-center gap-2">
+                    <div className="flex flex-row gap-2 items-center text-[17px] ">
+                      <img
+                        id="gravatar-image"
+                        alt="Gravatar"
+                        className="rounded-full w-6 h-6"
+                      />
+                      <p className="hidden lg:block">{userEmail.name}</p>
+                    </div>
+                  </Link>
+                  <div className="hidden none absolute min-w-[100px] z-10 group-hover:block bg-white shadow-lg rounded-md">
+                    <Link
+                      to="/orders"
+                      className="block px-2  hover:bg-gray-100 text-[17px] text-textColor rounded-md"
+                    >
+                      <p>Orders</p>
+                    </Link>
                   </div>
-                </Link>
+                </div>
               </div>
             ) : (
               <div className="hidden lg:flex flex-row gap-1 sh6 py-3">
