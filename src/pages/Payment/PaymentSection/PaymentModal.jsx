@@ -13,7 +13,6 @@ export default function PaymentModal({ paymentData }) {
     expire_month: "",
     expire_year: "",
     name_on_card: "",
-    card_ccv: "",
   };
 
   const {
@@ -126,24 +125,6 @@ export default function PaymentModal({ paymentData }) {
                 Please enter a valid name
               </div>
             )}
-
-            <input
-              {...register("card_ccv", {
-                required: true,
-                minLength: 3,
-                maxLength: 3,
-                pattern: /^\d{3}$/,
-              })}
-              className="border bg-white h-10 px-5 my-2"
-              placeholder="Card CCV"
-              type="number"
-            />
-            {errors.card_ccv && (
-              <div className="form-error text-dangerTextColor text-sm">
-                CCV must be 3 digits
-              </div>
-            )}
-
             <button
               type="submit"
               className="bg-color3 text-white rounded-md py-2 px-10 sh4 my-2"

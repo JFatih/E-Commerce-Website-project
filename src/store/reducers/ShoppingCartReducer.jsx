@@ -12,7 +12,7 @@ import {
 const initialValue = {
   cart: [],
   payment: {},
-  address: { shippingAddress: [], invoiceAddress: [] },
+  address: { shippingAddress: undefined, invoiceAddress: undefined },
 };
 
 const ShoppingCartReducer = (state = initialValue, action) => {
@@ -73,7 +73,7 @@ const ShoppingCartReducer = (state = initialValue, action) => {
       return {
         cart: [],
         payment: {},
-        address: { shippingAddress: [], invoiceAddress: [] },
+        address: { shippingAddress: undefined, invoiceAddress: undefined },
       };
     default:
       return state;
